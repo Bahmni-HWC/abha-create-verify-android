@@ -1,4 +1,4 @@
-package com.example.abha_create_verify_android
+package com.example.abha_create_verify_android.verify
 
 import android.content.Intent
 import android.os.Bundle
@@ -8,18 +8,19 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.abha_create_verify_android.databinding.ActivityAuthModeBinding
+import com.example.abha_create_verify_android.R
+import com.example.abha_create_verify_android.databinding.ActivityVerifyAuthModeBinding
 
+class VerifyAuthModeActivity : AppCompatActivity() {
 
-class AuthModeActivity : AppCompatActivity() {
-
-    private lateinit var binding: ActivityAuthModeBinding
+    private lateinit var binding: ActivityVerifyAuthModeBinding
 
     private var xPosition: Int = 0
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityAuthModeBinding.inflate(layoutInflater)
+        binding = ActivityVerifyAuthModeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         setSupportActionBar(binding.toolbarAbha)
@@ -28,13 +29,13 @@ class AuthModeActivity : AppCompatActivity() {
 
         binding.proceedButton.setOnClickListener {
             if (xPosition == 1) {
-                moveToDemographic()
+                moveToMobile()
             } else if (xPosition == 2) {
                 moveToAadhaarOTP()
             }
         }
 
-        val items = resources.getStringArray(R.array.menu_items)
+        val items = resources.getStringArray(R.array.menu_items_verify)
 
         val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, items)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
@@ -67,13 +68,13 @@ class AuthModeActivity : AppCompatActivity() {
 
     }
 
-    private fun moveToDemographic() {
-        val intent = Intent(this, DemographicActivity::class.java)
-        startActivity(intent)
+    private fun moveToMobile() {
+//        val intent = Intent(this, ::class.java)
+//        startActivity(intent)
     }
 
     private fun moveToAadhaarOTP() {
-        val intent = Intent(this, AadhaarOTPActivity::class.java)
+        val intent = Intent(this, VerifyAadhaarOTPActivity::class.java)
         startActivity(intent)
     }
 

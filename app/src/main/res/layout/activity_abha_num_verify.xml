@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CreateAbhaActivity">
+    tools:context=".verify.AbhaNumVerifyActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
@@ -38,7 +38,7 @@
             android:layout_height="wrap_content"
             android:layout_above="@+id/aadhaarTextInputLayout"
             android:layout_marginBottom="1dp"
-            android:text="@string/aadhaar_validation"
+            android:text="@string/abha_number_verification"
             android:textColor="@color/black"
             android:textSize="16sp"
             android:textStyle="bold" />
@@ -49,16 +49,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:hint="@string/enter_aadhaar_number"
+            android:hint="@string/enter_your_abha_number"
             app:boxBackgroundColor="@color/box_color">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/aadhaarEditText"
+                android:id="@+id/mobileEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="number"
-                android:maxLines="1"
-                android:maxLength="14"/>
+                android:maxLength="15"
+                android:maxLines="1" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -70,17 +70,55 @@
             android:text="@string/do_you_agree_with_the_terms_and_conditions"
             android:textColor="@color/gray" />
 
+
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/proceedButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/checkbox"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="30dp"
             android:background="@color/yellow"
             android:gravity="center"
             android:text="@string/proceed"
             android:textAllCaps="false"
             android:textColor="@color/white"
             android:textStyle="bold" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txtLinked"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/txtNotLinked"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="1dp"
+            android:text="@string/abha_number_is_already_linked"
+            android:textColor="@color/teal_700"
+            android:textSize="12sp"
+            android:textStyle="normal" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txtNotLinked"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/txtLinkItNow"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="1dp"
+            android:text="@string/abha_number_is_not_linked"
+            android:textColor="@color/red"
+            android:textSize="12sp"
+            android:textStyle="normal" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/txtLinkItNow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="25dp"
+            android:text="@string/link_it_now"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:textStyle="normal" />
+
     </RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -18,6 +18,7 @@
     <string name="do_you_agree_with_the_terms_and_conditions">Do you agree with the terms and conditions</string>
     <string name="proceed">Proceed</string>
     <string name="check_your_aadhaar_linked_mobile_number">Check your aadhaar linked mobile number</string>
+    <string name="check_your_abha_linked_mobile_number">Check your ABHA linked mobile number</string>
     <string name="enter_otp">Enter OTP</string>
     <string name="incorrect_otp">Incorrect OTP</string>
     <string name="correct_otp">Correct OTP</string>
@@ -38,6 +39,11 @@
     <string name="abha_address">ABHA address</string>
     <string name="enter_abha_address">Enter ABHA Address</string>
     <string name="generate_default_address">Generate default address</string>
+    <string name="abha_number_verification">ABHA number verification</string>
+    <string name="enter_your_abha_number">Enter your ABHA number</string>
+    <string name="abha_number_is_not_linked">Abha Number is not linked</string>
+    <string name="link_it_now">Link it now?</string>
+    <string name="abha_number_is_already_linked">ABHA number is already linked!</string>
 
 
 </resources>
