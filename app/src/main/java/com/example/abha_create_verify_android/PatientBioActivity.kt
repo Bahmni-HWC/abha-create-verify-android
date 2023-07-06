@@ -44,6 +44,7 @@ class PatientBioActivity : AppCompatActivity() {
                                 PatientSubject().setABHANumber(data.healthIdNumber)
                                 intent.putExtra("healthIdNumber", data.healthIdNumber)
                                 startActivity(intent)
+                                finish()
                             }
                         }
 

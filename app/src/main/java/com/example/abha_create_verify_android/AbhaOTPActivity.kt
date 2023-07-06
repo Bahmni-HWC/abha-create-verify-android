@@ -41,6 +41,7 @@ class AbhaOTPActivity : AppCompatActivity() {
                                 PatientSubject().setMobile(intent.getStringExtra("mobileNumber")!!)
                                 val intent = Intent(this, PatientBioActivity::class.java)
                                 startActivity(intent)
+                                finish()
                             }
                         }
 

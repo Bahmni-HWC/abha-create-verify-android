@@ -41,6 +41,7 @@ class AadhaarOTPActivity : AppCompatActivity() {
                                 val intent = Intent(this, AbhaMobileActivity::class.java)
                                 PatientSubject().setDemographics(data)
                                 startActivity(intent)
+                                finish()
                             }
                         }
 

@@ -3,6 +3,7 @@ package com.example.abha_create_verify_android
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
@@ -26,6 +27,7 @@ class CustomAbhaAddressActivity : AppCompatActivity() {
 
         setSupportActionBar(binding.toolbarAbha)
         supportActionBar?.title = resources.getString(R.string.create_abha)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         binding.proceedButton.setOnClickListener {
             viewModel.createAbhaAddress(CreateAbhaAddressReq(binding.editTextAbhaAddress.text.toString(),binding.checkbox.isChecked.toString())).observe(this
@@ -58,6 +60,15 @@ class CustomAbhaAddressActivity : AppCompatActivity() {
             this,
             ViewModelFactory(ApiHelper(RetrofitBuilder.apiService))
         )[MainViewModel::class.java]
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == android.R.id.home) {
+            // Handle back button click here
+            onBackPressedDispatcher.onBackPressed()
+            return true
+        }
+        return super.onOptionsItemSelected(item)
     }
 
 }

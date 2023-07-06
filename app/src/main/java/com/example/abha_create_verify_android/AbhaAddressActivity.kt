@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.ViewModelProvider
 import com.example.abha_create_verify_android.data.api.ApiHelper
 import com.example.abha_create_verify_android.data.api.RetrofitBuilder
@@ -69,6 +70,18 @@ class AbhaAddressActivity : AppCompatActivity() {
             this,
             ViewModelFactory(ApiHelper(RetrofitBuilder.apiService))
         )[MainViewModel::class.java]
+    }
+
+    override fun onBackPressed() {
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("Confirmation")
+            .setMessage("Are you sure you want to go back to the home screen?")
+            .setPositiveButton("Yes") { _, _ ->
+                val intent = Intent(this, CreateAbhaActivity::class.java)
+                startActivity(intent)
+            }
+            .setNegativeButton("No", null)
+            .show()
     }
 
 }
