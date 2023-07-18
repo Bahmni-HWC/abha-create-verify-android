@@ -36,6 +36,7 @@ class AbhaAddressActivity : AppCompatActivity() {
         binding.createCustom.setOnClickListener {
             val intent = Intent(this, CustomAbhaAddressActivity::class.java)
             startActivity(intent)
+            finish()
         }
 
         binding.createDefault.setOnClickListener {
@@ -48,6 +49,7 @@ class AbhaAddressActivity : AppCompatActivity() {
                                 PatientSubject().setABHAAddress(data.abhaAddress)
                                 val intent = Intent(this, AbhaAddressSuccessActivity::class.java)
                                 startActivity(intent)
+                                finish()
                             }
                         }
 
@@ -77,8 +79,9 @@ class AbhaAddressActivity : AppCompatActivity() {
         builder.setTitle("Confirmation")
             .setMessage("Are you sure you want to go back to the home screen?")
             .setPositiveButton("Yes") { _, _ ->
-                val intent = Intent(this, CreateAbhaActivity::class.java)
-                startActivity(intent)
+//                val intent = Intent(this, CreateAbhaActivity::class.java)
+//                startActivity(intent)
+                onBackPressedDispatcher.onBackPressed()
             }
             .setNegativeButton("No", null)
             .show()

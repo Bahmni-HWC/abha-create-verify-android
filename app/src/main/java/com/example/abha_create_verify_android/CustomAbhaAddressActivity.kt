@@ -39,6 +39,7 @@ class CustomAbhaAddressActivity : AppCompatActivity() {
                             PatientSubject().setABHAAddress(binding.editTextAbhaAddress.text.toString() + getString(R.string.abha_suffix))
                             val intent = Intent(this, AbhaAddressSuccessActivity::class.java)
                             startActivity(intent)
+                            finish()
                         }
 
                         Status.ERROR -> {
@@ -65,7 +66,10 @@ class CustomAbhaAddressActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == android.R.id.home) {
             // Handle back button click here
-            onBackPressedDispatcher.onBackPressed()
+//            onBackPressedDispatcher.onBackPressed()
+            val intent = Intent(this, AbhaAddressActivity::class.java)
+            startActivity(intent)
+            finish()
             return true
         }
         return super.onOptionsItemSelected(item)

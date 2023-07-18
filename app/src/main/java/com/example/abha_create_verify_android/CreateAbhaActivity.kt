@@ -47,6 +47,7 @@ class CreateAbhaActivity : AppCompatActivity() {
                 val intent = Intent(this, AuthModeActivity::class.java)
                 intent.putExtra("aadhaarNumber", binding.aadhaarEditText.text.toString())
                 startActivity(intent)
+                finish()
             }
         }
 

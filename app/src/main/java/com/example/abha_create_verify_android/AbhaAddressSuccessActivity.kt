@@ -30,8 +30,8 @@ class AbhaAddressSuccessActivity : AppCompatActivity() {
     }
 
     private fun exitApplication() {
-        finishAffinity()
-        System.exit(0)
+//        onBackPressedDispatcher.onBackPressed()
+        finish()
     }
 
     override fun onBackPressed() {
@@ -39,8 +39,9 @@ class AbhaAddressSuccessActivity : AppCompatActivity() {
         builder.setTitle("Confirmation")
             .setMessage("Are you sure you want to go back to the home screen?")
             .setPositiveButton("Yes") { _, _ ->
-                val intent = Intent(this, CreateAbhaActivity::class.java)
-                startActivity(intent)
+//                val intent = Intent(this, CreateAbhaActivity::class.java)
+//                startActivity(intent)
+                onBackPressedDispatcher.onBackPressed()
             }
             .setNegativeButton("No", null)
             .show()
