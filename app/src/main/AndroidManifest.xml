@@ -52,6 +52,7 @@
             android:name=".CreateAbhaActivity"
             android:exported="true"
             android:theme="@style/Theme.Abhacreateverifyandroid.NoActionBar">
+            <!-- comment the following intent filter if you want to use this activity as a library -->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
