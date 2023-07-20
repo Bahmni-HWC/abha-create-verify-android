@@ -1,28 +1,30 @@
 package com.example.abha_create_verify_android
 
-import android.provider.ContactsContract.CommonDataKinds.Phone
+import com.example.abha_create_verify_android.utils.Patient
 import com.example.abha_create_verify_android.data.model.VerifyAadhaarOTPResp
-import com.google.gson.Gson
-import com.google.gson.JsonObject
+import java.text.SimpleDateFormat
+import java.util.Date
 
 class PatientSubject {
 
-        var name: String = ""
-        var firstName: String = ""
-        var middleName: String = ""
-        var lastName: String = ""
-        var dateOfBirth: String = ""
-        var gender: String = ""
-        var abhaNumber: String = ""
-        var abhaAddress: String = ""
-        var address: String = ""
-        var phoneNumber: String = ""
 
     fun setDemographics(patient: VerifyAadhaarOTPResp){
         patientSubject.name = patient.fullName
         separateFullName(patient.fullName)
-        patientSubject.dateOfBirth = patient.birthdate
-        patientSubject.gender = patient.gender
+        patientSubject.dateOfBirth = formatDateOfBirth(patient.birthdate)
+        patientSubject.gender = convertGenderAbbreviationToFull(patient.gender)
+        patientSubject.villageTownCity = patient.villageTownCity
+        patientSubject.address = getAddress(patient)
+    }
+
+    private fun formatDateOfBirth(dateOfBirth : String): String {
+        val inputFormat = SimpleDateFormat("dd-MM-yyyy")
+        val outputFormat = SimpleDateFormat("dd/MM/yyyy")
+        val date: Date = inputFormat.parse(dateOfBirth)
+        return outputFormat.format(date)
+    }
+
+    private fun getAddress(patient: VerifyAadhaarOTPResp): String {
         val addressString = StringBuilder()
         listOfNotNull(
             patient.house,
@@ -37,7 +39,7 @@ class PatientSubject {
             }
             addressString.append(str)
         }
-        patientSubject.address = addressString.toString()
+        return addressString.toString()
     }
 
     fun setABHANumber(abhaNumber: String){
@@ -53,19 +55,19 @@ class PatientSubject {
     }
     private fun separateFullName(fullName: String) {
         val parts = fullName.split(" ")
-        patientSubject.firstName = parts[0]
-        patientSubject.middleName = if (parts.size > 2) parts.subList(1, parts.size - 1).joinToString(" ") else ""
+        patientSubject.firstName = parts.subList(0, parts.size - 1).joinToString(" ")
         patientSubject.lastName = parts.last()
     }
 
-    fun covertToJson(){
-        val gson = Gson()
-        patientSubjectJson = gson.toJsonTree(patientSubject).asJsonObject
+    private fun convertGenderAbbreviationToFull(genderAbbreviation: String): String {
+        return when (genderAbbreviation.toUpperCase()) {
+            "F" -> "Female"
+            "M" -> "Male"
+            else -> "Other" // Return the original value if not "F" or "M"
+        }
     }
 
-
     companion object {
-        var patientSubject = PatientSubject()
-        var patientSubjectJson = JsonObject()
+        var patientSubject = Patient()
     }
 }

@@ -1,12 +1,16 @@
 package com.example.abha_create_verify_android
 
-import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.appcompat.app.AlertDialog
 import com.example.abha_create_verify_android.databinding.ActivityAbhaAddressSuceessBinding
+import com.facebook.react.ReactActivity
+import com.facebook.react.bridge.Arguments
+import com.facebook.react.bridge.WritableMap
+import com.facebook.react.modules.core.DeviceEventManagerModule
+import com.google.gson.Gson
 
-class AbhaAddressSuccessActivity : AppCompatActivity() {
+class AbhaAddressSuccessActivity : ReactActivity() {
 
     private lateinit var binding: ActivityAbhaAddressSuceessBinding
 
@@ -21,7 +25,6 @@ class AbhaAddressSuccessActivity : AppCompatActivity() {
 
         binding.abhaNumber.text =  PatientSubject.patientSubject.abhaNumber
         binding.abhaAddress.text =  PatientSubject.patientSubject.abhaAddress
-        PatientSubject.patientSubject.covertToJson()
 
         binding.finishButton.setOnClickListener {
             exitApplication()
@@ -30,8 +33,19 @@ class AbhaAddressSuccessActivity : AppCompatActivity() {
     }
 
     private fun exitApplication() {
-//        onBackPressedDispatcher.onBackPressed()
-        finish()
+        val map: WritableMap = Arguments.createMap()
+        val gson = Gson()
+        val jsonString = gson.toJson(PatientSubject.patientSubject)
+        map.putString("patientInfo", jsonString)
+        try {
+            reactInstanceManager.currentReactContext
+                ?.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter::class.java)
+                ?.emit("abha_response", map)
+        } catch (e: Exception) {
+            Log.e("ReactNative", "Caught Exception: " + e.message)
+        }
+
+        onBackPressedDispatcher.onBackPressed()
     }
 
     override fun onBackPressed() {
