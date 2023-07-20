@@ -6,7 +6,6 @@ import com.facebook.react.ReactNativeHost
 import com.facebook.react.ReactPackage
 import com.facebook.react.shell.MainReactPackage
 import com.facebook.soloader.SoLoader
-import java.util.Arrays
 
 
 class MainApplication : Application(), ReactApplication {
@@ -16,7 +15,7 @@ class MainApplication : Application(), ReactApplication {
         }
 
         override fun getPackages(): List<ReactPackage> {
-            return Arrays.asList<ReactPackage>(
+            return listOf<ReactPackage>(
                 MainReactPackage() // Add other React Native packages if needed
             )
         }
@@ -28,6 +27,6 @@ class MainApplication : Application(), ReactApplication {
 
     override fun onCreate() {
         super.onCreate()
-        SoLoader.init(this,  /* native exopackage */false)
+        SoLoader.init(this,  /* native package */false)
     }
 }

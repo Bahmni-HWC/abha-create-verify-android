@@ -79,9 +79,8 @@ class AbhaAddressActivity : AppCompatActivity() {
         builder.setTitle("Confirmation")
             .setMessage("Are you sure you want to go back to the home screen?")
             .setPositiveButton("Yes") { _, _ ->
-//                val intent = Intent(this, CreateAbhaActivity::class.java)
-//                startActivity(intent)
-                onBackPressedDispatcher.onBackPressed()
+                val intent = Intent(this, CreateAbhaActivity::class.java)
+                startActivity(intent)
             }
             .setNegativeButton("No", null)
             .show()

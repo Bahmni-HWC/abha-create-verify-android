@@ -1,5 +1,7 @@
 package com.example.abha_create_verify_android
 
+import android.annotation.SuppressLint
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AlertDialog
@@ -32,6 +34,7 @@ class AbhaAddressSuccessActivity : ReactActivity() {
 
     }
 
+    @SuppressLint("VisibleForTests")
     private fun exitApplication() {
         val map: WritableMap = Arguments.createMap()
         val gson = Gson()
@@ -53,9 +56,8 @@ class AbhaAddressSuccessActivity : ReactActivity() {
         builder.setTitle("Confirmation")
             .setMessage("Are you sure you want to go back to the home screen?")
             .setPositiveButton("Yes") { _, _ ->
-//                val intent = Intent(this, CreateAbhaActivity::class.java)
-//                startActivity(intent)
-                onBackPressedDispatcher.onBackPressed()
+                val intent = Intent(this, CreateAbhaActivity::class.java)
+                startActivity(intent)
             }
             .setNegativeButton("No", null)
             .show()

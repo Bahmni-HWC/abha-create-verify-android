@@ -1,9 +1,11 @@
 package com.example.abha_create_verify_android
 
+import android.annotation.SuppressLint
 import com.example.abha_create_verify_android.utils.Patient
 import com.example.abha_create_verify_android.data.model.VerifyAadhaarOTPResp
 import java.text.SimpleDateFormat
 import java.util.Date
+import java.util.Locale
 
 class PatientSubject {
 
@@ -17,10 +19,11 @@ class PatientSubject {
         patientSubject.address = getAddress(patient)
     }
 
+    @SuppressLint("SimpleDateFormat")
     private fun formatDateOfBirth(dateOfBirth : String): String {
         val inputFormat = SimpleDateFormat("dd-MM-yyyy")
         val outputFormat = SimpleDateFormat("dd/MM/yyyy")
-        val date: Date = inputFormat.parse(dateOfBirth)
+        val date: Date = inputFormat.parse(dateOfBirth) as Date
         return outputFormat.format(date)
     }
 
@@ -60,7 +63,7 @@ class PatientSubject {
     }
 
     private fun convertGenderAbbreviationToFull(genderAbbreviation: String): String {
-        return when (genderAbbreviation.toUpperCase()) {
+        return when (genderAbbreviation.uppercase(Locale.getDefault())) {
             "F" -> "Female"
             "M" -> "Male"
             else -> "Other" // Return the original value if not "F" or "M"
