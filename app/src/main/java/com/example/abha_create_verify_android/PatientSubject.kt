@@ -22,7 +22,7 @@ class PatientSubject {
     @SuppressLint("SimpleDateFormat")
     private fun formatDateOfBirth(dateOfBirth : String): String {
         val inputFormat = SimpleDateFormat("dd-MM-yyyy")
-        val outputFormat = SimpleDateFormat("dd/MM/yyyy")
+        val outputFormat = SimpleDateFormat("yyyy-MM-dd")
         val date: Date = inputFormat.parse(dateOfBirth) as Date
         return outputFormat.format(date)
     }
