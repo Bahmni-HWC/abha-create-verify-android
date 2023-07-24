@@ -13,6 +13,19 @@
         android:theme="@style/Theme.Abhacreateverifyandroid"
         tools:targetApi="31">
         <activity
+            android:name=".verify.VerifyOTPActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Abhacreateverifyandroid.NoActionBar" />
+        <activity
+            android:name=".verify.AuthModeActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Abhacreateverifyandroid.NoActionBar" />
+        <activity
+            android:name=".verify.AbhaVerifyActivity"
+            android:exported="true"
+            android:theme="@style/Theme.Abhacreateverifyandroid.NoActionBar" >
+        </activity>
+        <activity
             android:name=".AbhaAddressSuccessActivity"
             android:exported="false"
             android:theme="@style/Theme.Abhacreateverifyandroid.NoActionBar" >
@@ -51,6 +64,11 @@
             android:theme="@style/Theme.Abhacreateverifyandroid.NoActionBar" />
         <activity
             android:name=".CreateAbhaActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Abhacreateverifyandroid.NoActionBar">
+        </activity>
+        <activity
+            android:name=".MainActivity"
             android:exported="true"
             android:theme="@style/Theme.Abhacreateverifyandroid.NoActionBar">
             <!-- comment the following intent filter if you want to use this activity as a library -->
@@ -60,11 +78,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".MainActivity"
-            android:exported="true"
-            android:label="@string/app_name"
-            android:theme="@style/Theme.Abhacreateverifyandroid.NoActionBar" />
     </application>
     <uses-permission android:name="android.permission.INTERNET"/>
 

@@ -5,4 +5,10 @@
         <item>Aadhaar Demographics</item>
         <item>Aadhaar OTP</item>
     </string-array>
+
+    <string-array name="menu_items_verify">
+        <item>Please choose Auth</item>
+        <item>Mobile OTP</item>
+        <item>Aadhaar OTP</item>
+    </string-array>
 </resources>
