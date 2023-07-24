@@ -31,7 +31,10 @@ class CreateAbhaActivity : AppCompatActivity() {
             showTermsAndConditionsPopup()
         }
 
-        RetrofitBuilder.AUTH_TOKEN = intent.getStringExtra("sessionToken").toString()
+        val token = intent.getStringExtra("sessionToken")
+        if(token != null) {
+            RetrofitBuilder.AUTH_TOKEN = token
+        }
         RetrofitBuilder.BASE_URL = intent.getStringExtra("hipBaseURL").toString()
 
         binding.proceedButton.setOnClickListener {
