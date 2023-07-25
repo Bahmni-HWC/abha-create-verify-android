@@ -8,36 +8,68 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
+import com.example.abha_create_verify_android.MainViewModel
 import com.example.abha_create_verify_android.R
+import com.example.abha_create_verify_android.ViewModelFactory
+import com.example.abha_create_verify_android.data.api.ApiHelper
+import com.example.abha_create_verify_android.data.api.RetrofitBuilder
+import com.example.abha_create_verify_android.data.model.AuthInitReq
+import com.example.abha_create_verify_android.data.model.SearchAbhaReq
 import com.example.abha_create_verify_android.databinding.ActivityVerifyAuthModeBinding
+import com.example.abha_create_verify_android.utils.Status
 
 class AuthModeActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityVerifyAuthModeBinding
-
-    private var xPosition: Int = 0
+    private lateinit var viewModel: MainViewModel
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityVerifyAuthModeBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        setupViewModel()
 
         setSupportActionBar(binding.toolbarAbha)
         supportActionBar?.title = resources.getString(R.string.verify_abha)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
+        var selectedAuthMode: String? = null
+        val authModes = intent.getStringArrayListExtra("authModes")
+
         binding.proceedButton.setOnClickListener {
-            val intent = Intent(this, VerifyOTPActivity::class.java)
-            startActivity(intent)
-            finish()
+            viewModel.authInit(AuthInitReq(intent.getStringExtra("abhaId").toString(),selectedAuthMode.toString())).observe(this) {
+                it?.let { resource ->
+                    when (resource.status) {
+                        Status.SUCCESS -> {
+                            binding.progressBar.visibility = View.GONE
+                            resource.data?.let { data ->
+                                val intent = Intent(this, VerifyOTPActivity::class.java)
+                                intent.putExtra("authMode", selectedAuthMode)
+                                startActivity(intent)
+                                finish()
+                            }
+                        }
+
+                        Status.ERROR -> {
+                            binding.progressBar.visibility = View.GONE
+                            Toast.makeText(this, it.message, Toast.LENGTH_LONG).show()
+                        }
+
+                        Status.LOADING -> {
+                            binding.progressBar.visibility = View.VISIBLE
+                        }
+                    }
+                }
+            }
         }
 
-        val items = resources.getStringArray(R.array.menu_items_verify)
-
-        val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, items)
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        binding.spinnerMode.adapter = adapter
+        if (authModes != null) {
+            val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, authModes)
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            binding.spinnerMode.adapter = adapter
+        }
 
         binding.spinnerMode.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(
@@ -46,15 +78,12 @@ class AuthModeActivity : AppCompatActivity() {
                 position: Int,
                 id: Long
             ) {
-                val selectedItem = parent.getItemAtPosition(position).toString()
+                selectedAuthMode = parent.getItemAtPosition(position).toString()
                 Toast.makeText(
                     applicationContext,
-                    "You selected: $selectedItem",
+                    "You selected: $selectedAuthMode",
                     Toast.LENGTH_SHORT
                 ).show()
-
-                xPosition = position
-
 
             }
 
@@ -66,6 +95,12 @@ class AuthModeActivity : AppCompatActivity() {
 
     }
 
+    private fun setupViewModel() {
+        viewModel = ViewModelProvider(
+            this,
+            ViewModelFactory(ApiHelper(RetrofitBuilder.apiService))
+        )[MainViewModel::class.java]
+    }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == android.R.id.home) {

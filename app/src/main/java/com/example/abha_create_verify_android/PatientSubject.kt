@@ -3,12 +3,12 @@ package com.example.abha_create_verify_android
 import android.annotation.SuppressLint
 import com.example.abha_create_verify_android.utils.Patient
 import com.example.abha_create_verify_android.data.model.VerifyAadhaarOTPResp
+import com.example.abha_create_verify_android.data.model.VerifyAbhaPatient
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
 class PatientSubject {
-
 
     fun setDemographics(patient: VerifyAadhaarOTPResp){
         patientSubject.name = patient.fullName
@@ -60,6 +60,27 @@ class PatientSubject {
         val parts = fullName.split(" ")
         patientSubject.firstName = parts.subList(0, parts.size - 1).joinToString(" ")
         patientSubject.lastName = parts.last()
+    }
+
+     fun setPatient(patient: VerifyAbhaPatient){
+        patientSubject.abhaNumber = patient.abhaNumber
+        patientSubject.abhaAddress = patient.abhaAddress
+        patientSubject.name = patient.name
+        patientSubject.firstName = patient.firstName + (patient.middleName.let { " $it" } ?: "")
+        patientSubject.lastName = patient.lastName
+        patientSubject.dateOfBirth = convertToDateFormat(patient.dayOfBirth, patient.monthOfBirth, patient.yearOfBirth)
+        patientSubject.gender = convertGenderAbbreviationToFull(patient.gender)
+        patientSubject.villageTownCity = patient.villageName ?: patient.townName ?: patient.subDistrictName ?: patient.districtName
+        patientSubject.address = patient.address
+        patientSubject.phoneNumber = patient.mobile
+    }
+
+    private fun convertToDateFormat(day: String?, month: String?, year: String?): String {
+        val d = day?.toIntOrNull() ?: 1
+        val m = month?.toIntOrNull() ?: 1
+        val y = year?.toIntOrNull()
+
+        return String.format("%04d-%02d-%02d", y, m, d)
     }
 
     private fun convertGenderAbbreviationToFull(genderAbbreviation: String): String {

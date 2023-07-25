@@ -13,6 +13,10 @@
         android:theme="@style/Theme.Abhacreateverifyandroid"
         tools:targetApi="31">
         <activity
+            android:name=".verify.PatientBioActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Abhacreateverifyandroid.NoActionBar" />
+        <activity
             android:name=".verify.VerifyOTPActivity"
             android:exported="false"
             android:theme="@style/Theme.Abhacreateverifyandroid.NoActionBar" />

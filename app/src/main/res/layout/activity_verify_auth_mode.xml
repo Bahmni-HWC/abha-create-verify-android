@@ -66,5 +66,13 @@
             android:textAllCaps="false"
             android:textColor="@color/white"
             android:textStyle="bold" />
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/proceedButton"
+            android:layout_centerInParent="true"
+            android:visibility="invisible"/>
     </RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

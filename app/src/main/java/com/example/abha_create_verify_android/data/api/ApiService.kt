@@ -2,7 +2,7 @@ package com.example.abha_create_verify_android.data.api
 
 import com.example.abha_create_verify_android.data.model.AuthInitReq
 import com.example.abha_create_verify_android.data.model.ConfirmOtpReq
-import com.example.abha_create_verify_android.data.model.ConfirmOtpResp
+import com.example.abha_create_verify_android.data.model.VerifyAbhaPatient
 import com.example.abha_create_verify_android.data.model.CreateABHAResp
 import com.example.abha_create_verify_android.data.model.CreateAbhaAddressReq
 import com.example.abha_create_verify_android.data.model.CreateDefaultAbhaAddressResp
@@ -49,6 +49,6 @@ interface ApiService {
     suspend fun authInit(@Body requestBody: AuthInitReq): Response<Unit>
 
     @POST("hiprovider/v2/hip/confirmOTP")
-    suspend fun confirmOtp(@Body requestBody: ConfirmOtpReq): Response<ConfirmOtpResp>
+    suspend fun confirmOtp(@Body requestBody: ConfirmOtpReq): Response<VerifyAbhaPatient>
 
 }

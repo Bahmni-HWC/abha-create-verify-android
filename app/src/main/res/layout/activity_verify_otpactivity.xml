@@ -53,7 +53,7 @@
             app:boxBackgroundColor="@color/box_color">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/aadhaarOTPEditText"
+                android:id="@+id/otpEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="number"
@@ -74,7 +74,8 @@
             android:text="@string/incorrect_otp"
             android:textColor="@color/black"
             android:textSize="13sp"
-            android:textStyle="italic" />
+            android:textStyle="italic"
+            android:visibility="invisible"/>
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/correctOTPText"
@@ -88,7 +89,8 @@
             android:text="@string/correct_otp"
             android:textColor="@color/black"
             android:textSize="13sp"
-            android:textStyle="italic" />
+            android:textStyle="italic"
+            android:visibility="invisible"/>
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/resendOTPText"
@@ -115,5 +117,13 @@
             android:textAllCaps="false"
             android:textColor="@color/white"
             android:textStyle="bold" />
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/proceedButton"
+            android:layout_centerInParent="true"
+            android:visibility="invisible"/>
     </RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
