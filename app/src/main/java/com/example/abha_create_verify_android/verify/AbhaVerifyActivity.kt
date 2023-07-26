@@ -26,6 +26,7 @@ import com.example.abha_create_verify_android.data.model.GenerateMobileOTPReq
 import com.example.abha_create_verify_android.data.model.SearchAbhaReq
 import com.example.abha_create_verify_android.databinding.ActivityAbhaVerifyBinding
 import com.example.abha_create_verify_android.utils.Status
+import com.example.abha_create_verify_android.utils.Variables
 
 class AbhaVerifyActivity : AppCompatActivity() {
 
@@ -52,48 +53,61 @@ class AbhaVerifyActivity : AppCompatActivity() {
         binding.proceedButton.setOnClickListener {
             var abhaId = binding.abhaEditText.text.toString()
             val checkbox = findViewById<CheckBox>(R.id.checkbox)
-            if(abhaId.isEmpty()) {
-                binding.errorMsg.text = String.format("Abha number/ Abha Address should not be empty")
+            if(abhaId.isEmpty() || abhaId.length != 14) {
+                binding.errorMsg.text = String.format("Abha number should have ")
             }
             else if(!checkbox.isChecked) {
                 binding.errorMsg.text = String.format("Checkbox needs to be checked")
             }
             else {
-                viewModel.searchAbhaId(SearchAbhaReq(abhaId)).observe(this) {
-                    it?.let { resource ->
-                        when (resource.status) {
-                            Status.SUCCESS -> {
-                                binding.progressBar.visibility = View.GONE
-                                resource.data?.let { data ->
-                                    val intent = Intent(this, AuthModeActivity::class.java)
-                                    intent.putStringArrayListExtra(
-                                        "authModes",
-                                        ArrayList(getAuthModes(data.authModes))
-                                    )
-                                    intent.putExtra("abhaId", abhaId)
-                                    startActivity(intent)
-                                    finish()
+                if(!checkIfAbhaNumerExists(abhaId)) {
+                    viewModel.searchAbhaId(SearchAbhaReq(abhaId)).observe(this) {
+                        it?.let { resource ->
+                            when (resource.status) {
+                                Status.SUCCESS -> {
+                                    binding.progressBar.visibility = View.GONE
+                                    resource.data?.let { data ->
+                                        val intent = Intent(this, AuthModeActivity::class.java)
+                                        intent.putStringArrayListExtra(
+                                            "authModes",
+                                            ArrayList(getAuthModes(data.authModes))
+                                        )
+                                        intent.putExtra("abhaId", abhaId)
+                                        startActivity(intent)
+                                        finish()
+                                    }
                                 }
-                            }
 
-                            Status.ERROR -> {
-                                binding.progressBar.visibility = View.GONE
-                                Toast.makeText(this, it.message, Toast.LENGTH_LONG).show()
-                            }
+                                Status.ERROR -> {
+                                    binding.progressBar.visibility = View.GONE
+                                    Toast.makeText(this, it.message, Toast.LENGTH_LONG).show()
+                                }
 
-                            Status.LOADING -> {
-                                binding.progressBar.visibility = View.VISIBLE
+                                Status.LOADING -> {
+                                    binding.progressBar.visibility = View.VISIBLE
+                                }
                             }
                         }
                     }
                 }
+                else {
+                    binding.txtLinked.visibility = View.VISIBLE
+                }
             }
         }
+    }
 
-        binding.txtLinkItNow.setOnClickListener {
-            val intent = Intent(this, AuthModeActivity::class.java)
-            startActivity(intent)
+    private fun checkIfAbhaNumerExists(inputAbhaNumber: String): Boolean {
+        val existingABHANumber = Variables.EXISTING_ABHA_NUMBERS
+        if (existingABHANumber != null) {
+            for (abhaNumber in existingABHANumber) {
+                val resultString = abhaNumber.replace("-", "")
+                if (resultString == inputAbhaNumber) {
+                   return true
+                }
+            }
         }
+        return false;
     }
 
     private fun getAuthModes(authModes: List<String>): List<String> {

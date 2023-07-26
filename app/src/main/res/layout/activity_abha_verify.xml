@@ -56,7 +56,8 @@
                 android:id="@+id/abhaEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="text"
+                android:inputType="number"
+                android:maxLength="14"
                 android:maxLines="1" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -121,40 +122,15 @@
             android:id="@+id/txtLinked"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_above="@+id/txtNotLinked"
+            android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="1dp"
+            android:layout_marginBottom="50dp"
             android:text="@string/abha_number_is_already_linked"
             android:textColor="@color/teal_700"
             android:textSize="12sp"
             android:textStyle="normal"
             android:visibility="invisible"/>
 
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/txtNotLinked"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_above="@+id/txtLinkItNow"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="1dp"
-            android:text="@string/abha_number_is_not_linked"
-            android:textColor="@color/red"
-            android:textSize="12sp"
-            android:textStyle="normal"
-            android:visibility="invisible"/>
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/txtLinkItNow"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="25dp"
-            android:text="@string/link_it_now"
-            android:textColor="@color/black"
-            android:textSize="16sp"
-            android:textStyle="normal"
-            android:visibility="invisible"/>
 
     </RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

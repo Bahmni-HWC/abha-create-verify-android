@@ -63,10 +63,10 @@
     <string name="abha_suffix">\@sbx</string>
     <string name="check_your_abha_linked_mobile_number">Check your ABHA linked mobile number</string>
     <string name="abha_verification">ABHA verification</string>
-    <string name="enter_your_abha_number">Enter your ABHA number/ ABHA Address</string>
+    <string name="enter_your_abha_number">Enter your ABHA number</string>
     <string name="abha_number_is_not_linked">Abha Number is not linked</string>
     <string name="link_it_now">Link it now?</string>
-    <string name="abha_number_is_already_linked">ABHA number is already linked!</string>
+    <string name="abha_number_is_already_linked">ABHA number is already linked to the patient!</string>
     <string name="abha">ABHA</string>
 
 
