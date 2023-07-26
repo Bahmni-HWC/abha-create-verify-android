@@ -1,7 +1,6 @@
 package com.example.abha_create_verify_android.verify
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.method.LinkMovementMethod
 import android.text.method.ScrollingMovementMethod
@@ -12,17 +11,14 @@ import android.widget.ScrollView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
-import com.example.abha_create_verify_android.AbhaOTPActivity
 import com.example.abha_create_verify_android.MainActivity
 import com.example.abha_create_verify_android.MainViewModel
-import com.example.abha_create_verify_android.PatientBioActivity
-import com.example.abha_create_verify_android.PatientSubject
 import com.example.abha_create_verify_android.R
 import com.example.abha_create_verify_android.ViewModelFactory
 import com.example.abha_create_verify_android.data.api.ApiHelper
 import com.example.abha_create_verify_android.data.api.RetrofitBuilder
-import com.example.abha_create_verify_android.data.model.GenerateMobileOTPReq
 import com.example.abha_create_verify_android.data.model.SearchAbhaReq
 import com.example.abha_create_verify_android.databinding.ActivityAbhaVerifyBinding
 import com.example.abha_create_verify_android.utils.Status
@@ -51,7 +47,7 @@ class AbhaVerifyActivity : AppCompatActivity() {
 
 
         binding.proceedButton.setOnClickListener {
-            var abhaId = binding.abhaEditText.text.toString()
+            val abhaId = binding.abhaEditText.text.toString()
             val checkbox = findViewById<CheckBox>(R.id.checkbox)
             if(abhaId.isEmpty() || abhaId.length != 14) {
                 binding.errorMsg.text = String.format("Abha number should have ")
@@ -60,7 +56,7 @@ class AbhaVerifyActivity : AppCompatActivity() {
                 binding.errorMsg.text = String.format("Checkbox needs to be checked")
             }
             else {
-                if(!checkIfAbhaNumerExists(abhaId)) {
+                if(!checkIfAbhaNumberExists(abhaId)) {
                     viewModel.searchAbhaId(SearchAbhaReq(abhaId)).observe(this) {
                         it?.let { resource ->
                             when (resource.status) {
@@ -97,7 +93,7 @@ class AbhaVerifyActivity : AppCompatActivity() {
         }
     }
 
-    private fun checkIfAbhaNumerExists(inputAbhaNumber: String): Boolean {
+    private fun checkIfAbhaNumberExists(inputAbhaNumber: String): Boolean {
         val existingABHANumber = Variables.EXISTING_ABHA_NUMBERS
         if (existingABHANumber != null) {
             for (abhaNumber in existingABHANumber) {
@@ -107,7 +103,7 @@ class AbhaVerifyActivity : AppCompatActivity() {
                 }
             }
         }
-        return false;
+        return false
     }
 
     private fun getAuthModes(authModes: List<String>): List<String> {

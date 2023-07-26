@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AlertDialog
-import com.example.abha_create_verify_android.CreateAbhaActivity
 import com.example.abha_create_verify_android.PatientSubject
 import com.example.abha_create_verify_android.R
 import com.example.abha_create_verify_android.databinding.ActivityPatientBioBinding

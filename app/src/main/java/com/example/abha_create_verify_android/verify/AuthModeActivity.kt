@@ -15,7 +15,6 @@ import com.example.abha_create_verify_android.ViewModelFactory
 import com.example.abha_create_verify_android.data.api.ApiHelper
 import com.example.abha_create_verify_android.data.api.RetrofitBuilder
 import com.example.abha_create_verify_android.data.model.AuthInitReq
-import com.example.abha_create_verify_android.data.model.SearchAbhaReq
 import com.example.abha_create_verify_android.databinding.ActivityVerifyAuthModeBinding
 import com.example.abha_create_verify_android.utils.Status
 
@@ -44,7 +43,7 @@ class AuthModeActivity : AppCompatActivity() {
                     when (resource.status) {
                         Status.SUCCESS -> {
                             binding.progressBar.visibility = View.GONE
-                            resource.data?.let { data ->
+                            resource.data?.let {
                                 val intent = Intent(this, VerifyOTPActivity::class.java)
                                 intent.putExtra("authMode", selectedAuthMode)
                                 startActivity(intent)
