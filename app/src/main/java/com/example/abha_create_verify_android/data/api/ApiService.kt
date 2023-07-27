@@ -14,6 +14,7 @@ import com.example.abha_create_verify_android.data.model.SearchAbhaReq
 import com.example.abha_create_verify_android.data.model.SearchAbhaResp
 import com.example.abha_create_verify_android.data.model.VerifyAadhaarOTPResp
 import com.example.abha_create_verify_android.data.model.VerifyOTPReq
+import com.example.abha_create_verify_android.utils.PatientDemographics
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -50,5 +51,8 @@ interface ApiService {
 
     @POST("hiprovider/v2/hip/confirmOTP")
     suspend fun confirmOtp(@Body requestBody: ConfirmOtpReq): Response<VerifyAbhaPatient>
+
+    @POST("hiprovider/v0.5/hip/ndhm-demographics")
+    suspend fun addPatientDemographics(@Body requestBody: PatientDemographics): Response<Unit>
 
 }

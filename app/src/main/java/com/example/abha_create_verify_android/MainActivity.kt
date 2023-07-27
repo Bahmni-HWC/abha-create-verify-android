@@ -36,7 +36,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.verifyAbha.setOnClickListener {
-            var stringArray = intent.getStringArrayExtra("existingABHANumbers")
+            val stringArray = intent.getStringArrayExtra("existingABHANumbers")
             if(stringArray != null) {
                  Variables.EXISTING_ABHA_NUMBERS = stringArray
             }

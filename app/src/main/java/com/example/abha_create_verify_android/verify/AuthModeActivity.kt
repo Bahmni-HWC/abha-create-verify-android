@@ -38,7 +38,7 @@ class AuthModeActivity : AppCompatActivity() {
         val authModes = intent.getStringArrayListExtra("authModes")
 
         binding.proceedButton.setOnClickListener {
-            viewModel.authInit(AuthInitReq(intent.getStringExtra("abhaId").toString(),selectedAuthMode.toString())).observe(this) {
+            viewModel.authInit(AuthInitReq(intent.getStringExtra("abhaId").toString(),selectedAuthMode.toString().replace(" ","_"))).observe(this) {
                 it?.let { resource ->
                     when (resource.status) {
                         Status.SUCCESS -> {
@@ -65,7 +65,8 @@ class AuthModeActivity : AppCompatActivity() {
         }
 
         if (authModes != null) {
-            val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, authModes)
+            val authModesList = authModes.map{it.replace("_", " ")}
+            val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, authModesList)
             adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
             binding.spinnerMode.adapter = adapter
         }

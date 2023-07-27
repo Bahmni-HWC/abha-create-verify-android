@@ -11,6 +11,7 @@ import com.example.abha_create_verify_android.data.model.GenerateMobileOTPReq
 import com.example.abha_create_verify_android.data.model.SearchAbhaReq
 import com.example.abha_create_verify_android.data.model.VerifyOTPReq
 import com.example.abha_create_verify_android.data.repository.MainRepository
+import com.example.abha_create_verify_android.utils.PatientDemographics
 import com.example.abha_create_verify_android.utils.Resource
 import com.google.gson.Gson
 import kotlinx.coroutines.Dispatchers
@@ -185,6 +186,23 @@ class MainViewModel(private val mainRepository: MainRepository) : ViewModel() {
         try {
             val res = mainRepository.confirmOtp(confirmOtpReq)
             if(res.code() == 202)
+                res.body()?.let {
+                    emit(Resource.success(data = it))
+                }
+            else {
+                val errorMessage = res.errorBody()?.let { handleErrorResponse(it) }!!
+                emit(Resource.error(data = null, message = errorMessage))
+            }
+        } catch (exception: Exception) {
+            emit(Resource.error(data = null, message = exception.message ?: "Error Occurred!"))
+        }
+    }
+
+    fun addPatientDemographics(patientDemographics: PatientDemographics) = liveData(Dispatchers.IO) {
+        emit(Resource.loading(data = null))
+        try {
+            val res = mainRepository.addPatientDemographics(patientDemographics)
+            if(res.code() == 200)
                 res.body()?.let {
                     emit(Resource.success(data = it))
                 }

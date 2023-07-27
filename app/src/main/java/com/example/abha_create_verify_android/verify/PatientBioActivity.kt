@@ -3,26 +3,32 @@ package com.example.abha_create_verify_android.verify
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AlertDialog
+import androidx.lifecycle.ViewModelProvider
+import com.example.abha_create_verify_android.MainViewModel
 import com.example.abha_create_verify_android.PatientSubject
 import com.example.abha_create_verify_android.R
+import com.example.abha_create_verify_android.ViewModelFactory
+import com.example.abha_create_verify_android.data.api.ApiHelper
+import com.example.abha_create_verify_android.data.api.RetrofitBuilder
 import com.example.abha_create_verify_android.databinding.ActivityPatientBioBinding
+import com.example.abha_create_verify_android.utils.ApiUtils
 import com.facebook.react.ReactActivity
 import com.facebook.react.bridge.Arguments
 import com.facebook.react.bridge.WritableMap
-import com.facebook.react.modules.core.DeviceEventManagerModule
 import com.google.gson.Gson
 
 class PatientBioActivity : ReactActivity() {
 
     private lateinit var binding: ActivityPatientBioBinding
+    private lateinit var viewModel: MainViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityPatientBioBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        setupViewModel()
 
         setSupportActionBar(binding.toolbarAbha)
         supportActionBar?.title = resources.getString(R.string.verify_abha)
@@ -55,14 +61,17 @@ class PatientBioActivity : ReactActivity() {
         val gson = Gson()
         val jsonString = gson.toJson(PatientSubject.patientSubject)
         map.putString("patientInfo", jsonString)
-        try {
-            reactInstanceManager.currentReactContext
-                ?.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter::class.java)
-                ?.emit("abha_response", map)
-        } catch (e: Exception) {
-            Log.e("ReactNative", "Caught Exception: " + e.message)
-        }
+
+        ApiUtils.handlePatientDemographicsResponse(this,viewModel, reactInstanceManager, map, this)
+
         onBackPressedDispatcher.onBackPressed()
+    }
+
+    private fun setupViewModel() {
+        viewModel = ViewModelProvider(
+            this,
+            ViewModelFactory(ApiHelper(RetrofitBuilder.apiService))
+        )[MainViewModel::class.java]
     }
 
     override fun onBackPressed() {

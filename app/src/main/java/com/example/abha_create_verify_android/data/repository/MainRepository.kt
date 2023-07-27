@@ -8,6 +8,7 @@ import com.example.abha_create_verify_android.data.model.GenerateAadhaarOTPReq
 import com.example.abha_create_verify_android.data.model.GenerateMobileOTPReq
 import com.example.abha_create_verify_android.data.model.SearchAbhaReq
 import com.example.abha_create_verify_android.data.model.VerifyOTPReq
+import com.example.abha_create_verify_android.utils.PatientDemographics
 
 class MainRepository(private val apiHelper: ApiHelper) {
 
@@ -30,4 +31,7 @@ class MainRepository(private val apiHelper: ApiHelper) {
     suspend fun authInit(authInitReq: AuthInitReq) = apiHelper.authInit(authInitReq)
 
     suspend fun confirmOtp(confirmOtpReq: ConfirmOtpReq) = apiHelper.confirmOtp(confirmOtpReq)
+
+    suspend fun addPatientDemographics(patientDemographics: PatientDemographics) = apiHelper.addPatientDemographics(patientDemographics)
+
 }

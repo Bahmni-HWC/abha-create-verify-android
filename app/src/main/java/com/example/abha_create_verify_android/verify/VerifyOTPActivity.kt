@@ -33,7 +33,7 @@ class VerifyOTPActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         binding.proceedButton.setOnClickListener {
-            viewModel.confirmOtp(ConfirmOtpReq(binding.otpEditText.text.toString(),intent.getStringExtra("authMode").toString())).observe(this) {
+            viewModel.confirmOtp(ConfirmOtpReq(binding.otpEditText.text.toString(),intent.getStringExtra("authMode").toString().replace(" ","_"))).observe(this) {
                 it?.let { resource ->
                     when (resource.status) {
                         Status.SUCCESS -> {

@@ -23,3 +23,16 @@ data class Patient(
     @SerializedName("villageTownCity")
     var villageTownCity: String? = ""
 )
+
+data class PatientDemographics(
+    @SerializedName("healthId")
+    var abhaAddress: String? = "",
+    @SerializedName("name")
+    var name: String? = "",
+    @SerializedName("gender")
+    var gender: String? = "",
+    @SerializedName("dateOfBirth")
+    var dateOfBirth: String? = "",
+    @SerializedName("phoneNumber")
+    var phoneNumber: String? = ""
+)
