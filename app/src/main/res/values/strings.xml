@@ -68,6 +68,7 @@
     <string name="link_it_now">Link it now?</string>
     <string name="abha_number_is_already_linked">ABHA number is already linked to the patient!</string>
     <string name="abha">ABHA</string>
+    <string name="no_abha_address">You don\'t have ABHA Address linked to your ABHA Number</string>
 
 
 </resources>

@@ -94,7 +94,6 @@ class PatientSubject {
     }
 
     private fun convertGender(gender: String): String {
-        println("gender: $gender")
         return when (gender.uppercase(Locale.getDefault())) {
             "F" -> "Female"
             "M" -> "Male"
