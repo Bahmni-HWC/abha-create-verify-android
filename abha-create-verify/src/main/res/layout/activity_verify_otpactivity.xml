@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".CreateAbhaActivity">
+    tools:context=".verify.VerifyOTPActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
@@ -36,73 +36,81 @@
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_above="@+id/aadhaarTextInputLayout"
-            android:layout_marginTop="1dp"
+            android:layout_above="@+id/aadhaarOTPTextInputLayout"
             android:layout_marginBottom="1dp"
-            android:text="@string/aadhaar_validation"
+            android:text="@string/check_your_abha_linked_mobile_number"
             android:textColor="@color/black"
             android:textSize="16sp"
             android:textStyle="bold" />
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/aadhaarTextInputLayout"
+            android:id="@+id/aadhaarOTPTextInputLayout"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:hint="@string/enter_aadhaar_number"
+            android:hint="@string/enter_otp"
             app:boxBackgroundColor="@color/box_color">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/aadhaarEditText"
+                android:id="@+id/otpEditText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="number"
                 android:maxLines="1"
-                android:maxLength="14"/>
+                android:maxLength="7" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/errorMsg"
+            android:id="@+id/incorrectOTPText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/proceedButton"
-            android:layout_marginTop="1dp"
+            android:layout_below="@+id/aadhaarOTPTextInputLayout"
             android:layout_marginBottom="1dp"
-            android:textColor="@color/red"
-            android:textSize="10sp" />
+            android:drawableStart="@drawable/incorrect"
+            android:drawablePadding="5dp"
+            android:gravity="center"
+            android:text="@string/incorrect_otp"
+            android:textColor="@color/black"
+            android:textSize="13sp"
+            android:textStyle="italic"
+            android:visibility="invisible"/>
 
-        <LinearLayout
-            android:id="@id/termsConditionsLayout"
-            android:layout_width="match_parent"
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/correctOTPText"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/aadhaarTextInputLayout"
-            android:orientation="horizontal">
+            android:layout_below="@+id/incorrectOTPText"
+            android:layout_marginBottom="1dp"
+            android:drawableStart="@drawable/correct"
+            android:drawablePadding="5dp"
+            android:gravity="center"
+            android:text="@string/correct_otp"
+            android:textColor="@color/black"
+            android:textSize="13sp"
+            android:textStyle="italic"
+            android:visibility="invisible"/>
 
-            <androidx.appcompat.widget.AppCompatCheckBox
-                android:id="@+id/checkbox"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColorLink="@color/gray" />
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/termsConditionsTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/do_you_agree_with_the_terms_and_conditions"
-                android:textColorLink="@color/gray"
-                android:clickable="true"
-                android:linksClickable="true" />
-
-        </LinearLayout>
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/resendOTPText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/incorrectOTPText"
+            android:layout_alignParentEnd="true"
+            android:layout_marginBottom="1dp"
+            android:gravity="center"
+            android:text="@string/resend_otp"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:textStyle="normal" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/proceedButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/termsConditionsLayout"
-            android:layout_marginTop="10dp"
+            android:layout_below="@+id/resendOTPText"
+            android:layout_marginTop="25dp"
             android:background="@color/yellow"
             android:gravity="center"
             android:text="@string/proceed"
@@ -110,5 +118,12 @@
             android:textColor="@color/white"
             android:textStyle="bold" />
 
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/proceedButton"
+            android:layout_centerInParent="true"
+            android:visibility="invisible"/>
     </RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
