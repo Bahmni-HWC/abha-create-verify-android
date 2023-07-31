@@ -38,8 +38,16 @@ class AadhaarOTPActivity : AppCompatActivity() {
                             binding.progressBar.visibility = View.GONE
                             binding.correctOTPText.visibility = View.VISIBLE
                             resource.data?.let { data ->
-                                val intent = Intent(this, AbhaMobileActivity::class.java)
-                                PatientSubject().setDemographics(data)
+                                PatientSubject().setAadhaarProfile(data)
+                                var intent = Intent(this, AbhaMobileActivity::class.java)
+                                if(data.abhaNumber != null)
+                                {
+                                    intent = if(data.abhaAddress != null) {
+                                        Intent(this, AbhaPatientProfileActivity::class.java)
+                                    } else{
+                                        Intent(this, PatientBioActivity::class.java)
+                                    }
+                                }
                                 startActivity(intent)
                                 finish()
                             }

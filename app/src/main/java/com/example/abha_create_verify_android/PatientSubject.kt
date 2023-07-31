@@ -11,13 +11,16 @@ import java.util.Locale
 
 class PatientSubject {
 
-    fun setDemographics(patient: VerifyAadhaarOTPResp){
+    fun setAadhaarProfile(patient: VerifyAadhaarOTPResp){
         patientSubject.name = patient.fullName
         separateFullName(patient.fullName)
         patientSubject.dateOfBirth = formatDateOfBirth(patient.birthdate)
         patientSubject.gender = convertGender(patient.gender)
         patientSubject.villageTownCity = patient.villageTownCity
         patientSubject.address = getAddress(patient)
+        patientSubject.phoneNumber = patient.phone
+        patientSubject.abhaNumber = patient.abhaNumber
+        patientSubject.abhaAddress = patient.abhaAddress
     }
 
     @SuppressLint("SimpleDateFormat")

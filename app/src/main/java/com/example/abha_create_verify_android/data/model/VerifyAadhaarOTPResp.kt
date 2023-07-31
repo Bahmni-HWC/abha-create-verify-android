@@ -13,8 +13,14 @@ data class VerifyAadhaarOTPResp(
     @SerializedName("careOf") val careOf: String,
     @SerializedName("house") val house: String,
     @SerializedName("street") val street: String,
+    @SerializedName("landmark") val landmark: String,
+    @SerializedName("locality") val locality: String,
     @SerializedName("villageTownCity") val villageTownCity: String,
+    @SerializedName("subDist") val subDist: String,
     @SerializedName("district") val district: String,
     @SerializedName("state") val state: String,
-    @SerializedName("pincode") val pincode: String
+    @SerializedName("pincode") val pincode: String,
+    @SerializedName("healthIdNumber") val abhaNumber: String,
+    @SerializedName("healthId") val abhaAddress: String,
+    @SerializedName("phone") val phone: String
 ) : Serializable

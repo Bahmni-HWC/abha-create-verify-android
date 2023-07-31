@@ -13,7 +13,7 @@
         android:theme="@style/Theme.Abhacreateverifyandroid"
         tools:targetApi="31">
         <activity
-            android:name=".verify.PatientBioActivity"
+            android:name=".AbhaPatientProfileActivity"
             android:exported="false"
             android:theme="@style/Theme.Abhacreateverifyandroid.NoActionBar" />
         <activity

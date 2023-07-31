@@ -12,13 +12,13 @@ import com.example.abha_create_verify_android.data.api.RetrofitBuilder
 import com.example.abha_create_verify_android.data.model.CreateAbhaAddressReq
 import com.example.abha_create_verify_android.databinding.ActivityCustomAbhaAddressBinding
 import com.example.abha_create_verify_android.utils.Status
-import com.example.abha_create_verify_android.verify.PatientBioActivity
 
 class CustomAbhaAddressActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityCustomAbhaAddressBinding
     private lateinit var viewModel: MainViewModel
     private var isVerify = false
+    private var isNewABHA = false
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,6 +34,7 @@ class CustomAbhaAddressActivity : AppCompatActivity() {
         supportActionBar?.title = resources.getString(if(isVerify) R.string.verify_abha else R.string.create_abha)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
+        isNewABHA = intent.getBooleanExtra("newABHA", false)
         binding.proceedButton.setOnClickListener {
             viewModel.createAbhaAddress(CreateAbhaAddressReq(binding.editTextAbhaAddress.text.toString(),binding.checkbox.isChecked.toString())).observe(this
             ) {
@@ -42,8 +43,9 @@ class CustomAbhaAddressActivity : AppCompatActivity() {
                         Status.SUCCESS -> {
                             binding.progressBar.visibility = View.GONE
                             PatientSubject().setABHAAddress(binding.editTextAbhaAddress.text.toString() + getString(R.string.abha_suffix))
-                            val intent = Intent(this, if(isVerify) PatientBioActivity::class.java
+                            val intent = Intent(this, if(isVerify) AbhaPatientProfileActivity::class.java
                             else AbhaAddressSuccessActivity::class.java)
+                            intent.putExtra("isVerify", isVerify)
                             startActivity(intent)
                             finish()
                         }
@@ -80,6 +82,7 @@ class CustomAbhaAddressActivity : AppCompatActivity() {
     override fun onBackPressed() {
         val intent = Intent(this, AbhaAddressActivity::class.java)
         intent.putExtra("isVerify", isVerify)
+        intent.putExtra("newABHA", isNewABHA)
         startActivity(intent)
         finish()
     }

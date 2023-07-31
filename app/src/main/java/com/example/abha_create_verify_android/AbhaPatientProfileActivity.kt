@@ -1,4 +1,4 @@
-package com.example.abha_create_verify_android.verify
+package com.example.abha_create_verify_android
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -6,23 +6,21 @@ import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.ViewModelProvider
-import com.example.abha_create_verify_android.MainViewModel
-import com.example.abha_create_verify_android.PatientSubject
-import com.example.abha_create_verify_android.R
-import com.example.abha_create_verify_android.ViewModelFactory
 import com.example.abha_create_verify_android.data.api.ApiHelper
 import com.example.abha_create_verify_android.data.api.RetrofitBuilder
 import com.example.abha_create_verify_android.databinding.ActivityPatientBioBinding
 import com.example.abha_create_verify_android.utils.ApiUtils
+import com.example.abha_create_verify_android.verify.AbhaVerifyActivity
 import com.facebook.react.ReactActivity
 import com.facebook.react.bridge.Arguments
 import com.facebook.react.bridge.WritableMap
 import com.google.gson.Gson
 
-class PatientBioActivity : ReactActivity() {
+class AbhaPatientProfileActivity : ReactActivity() {
 
     private lateinit var binding: ActivityPatientBioBinding
     private lateinit var viewModel: MainViewModel
+    private var isVerify = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,7 +29,10 @@ class PatientBioActivity : ReactActivity() {
         setupViewModel()
 
         setSupportActionBar(binding.toolbarAbha)
-        supportActionBar?.title = resources.getString(R.string.verify_abha)
+
+        isVerify = intent.getBooleanExtra("isVerify", false)
+        supportActionBar?.title = if(isVerify) resources.getString(R.string.verify_abha) else  resources.getString(R.string.create_abha)
+
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         val patientSubject = PatientSubject.patientSubject
@@ -79,7 +80,8 @@ class PatientBioActivity : ReactActivity() {
         builder.setTitle("Confirmation")
             .setMessage("Are you sure you want to go back to the home screen?")
             .setPositiveButton("Yes") { _, _ ->
-                val intent = Intent(this, AbhaVerifyActivity::class.java)
+                val intent = Intent(this, if(isVerify) AbhaVerifyActivity::class.java
+                else CreateAbhaActivity::class.java)
                 startActivity(intent)
             }
             .setNegativeButton("No", null)
