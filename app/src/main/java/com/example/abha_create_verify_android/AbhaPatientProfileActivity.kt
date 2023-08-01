@@ -10,6 +10,7 @@ import com.example.abha_create_verify_android.data.api.ApiHelper
 import com.example.abha_create_verify_android.data.api.RetrofitBuilder
 import com.example.abha_create_verify_android.databinding.ActivityPatientBioBinding
 import com.example.abha_create_verify_android.utils.ApiUtils
+import com.example.abha_create_verify_android.utils.Variables
 import com.example.abha_create_verify_android.verify.AbhaVerifyActivity
 import com.facebook.react.ReactActivity
 import com.facebook.react.bridge.Arguments
@@ -52,7 +53,13 @@ class AbhaPatientProfileActivity : ReactActivity() {
         binding.proceedButton.text = resources.getString(R.string.finish)
 
         binding.proceedButton.setOnClickListener {
-             exitApplication()
+            if(Variables.EXISTING_ABHA_NUMBERS?.contains(patientSubject.abhaNumber) == true)
+            {
+                binding.txtLinked.visibility = View.VISIBLE
+            }
+            else {
+                exitApplication()
+            }
         }
     }
 
