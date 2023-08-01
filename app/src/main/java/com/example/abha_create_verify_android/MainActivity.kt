@@ -31,6 +31,7 @@ class MainActivity : AppCompatActivity() {
         if(stringArray != null) {
             Variables.EXISTING_ABHA_NUMBERS = stringArray
         }
+        Variables.isABHAVerification = false
 
         binding.createAbha.setOnClickListener {
             val intent = Intent(this, CreateAbhaActivity::class.java)
@@ -40,6 +41,7 @@ class MainActivity : AppCompatActivity() {
 
         binding.verifyAbha.setOnClickListener {
             val intent = Intent(this, AbhaVerifyActivity::class.java)
+            Variables.isABHAVerification = true
             startActivity(intent)
             finish()
         }

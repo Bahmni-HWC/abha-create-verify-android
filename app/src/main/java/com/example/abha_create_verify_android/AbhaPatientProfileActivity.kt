@@ -21,7 +21,7 @@ class AbhaPatientProfileActivity : ReactActivity() {
 
     private lateinit var binding: ActivityPatientBioBinding
     private lateinit var viewModel: MainViewModel
-    private var isVerify = false
+    private var isABHAVerification = Variables.isABHAVerification
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,9 +30,8 @@ class AbhaPatientProfileActivity : ReactActivity() {
         setupViewModel()
 
         setSupportActionBar(binding.toolbarAbha)
-
-        isVerify = intent.getBooleanExtra("isVerify", false)
-        supportActionBar?.title = if(isVerify) resources.getString(R.string.verify_abha) else  resources.getString(R.string.create_abha)
+        
+        supportActionBar?.title = if(isABHAVerification) resources.getString(R.string.verify_abha) else  resources.getString(R.string.create_abha)
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
@@ -87,7 +86,7 @@ class AbhaPatientProfileActivity : ReactActivity() {
         builder.setTitle("Confirmation")
             .setMessage("Are you sure you want to go back to the home screen?")
             .setPositiveButton("Yes") { _, _ ->
-                val intent = Intent(this, if(isVerify) AbhaVerifyActivity::class.java
+                val intent = Intent(this, if(isABHAVerification) AbhaVerifyActivity::class.java
                 else CreateAbhaActivity::class.java)
                 startActivity(intent)
             }

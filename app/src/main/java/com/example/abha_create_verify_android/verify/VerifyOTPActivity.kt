@@ -45,13 +45,11 @@ class VerifyOTPActivity : AppCompatActivity() {
                                 PatientSubject().setPatient(data)
                                 if(data.abhaAddress == null) {
                                     val intent = Intent(this, AbhaAddressActivity::class.java)
-                                    intent.putExtra("isVerify", true)
                                     startActivity(intent)
                                     finish()
                                 }
                                 else {
                                     val intent = Intent(this, AbhaPatientProfileActivity::class.java)
-                                    intent.putExtra("isVerify", true)
                                     startActivity(intent)
                                     finish()
                                 }

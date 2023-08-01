@@ -9,6 +9,7 @@ import com.example.abha_create_verify_android.data.api.ApiHelper
 import com.example.abha_create_verify_android.data.api.RetrofitBuilder
 import com.example.abha_create_verify_android.databinding.ActivityAbhaAddressSuceessBinding
 import com.example.abha_create_verify_android.utils.ApiUtils
+import com.example.abha_create_verify_android.utils.Variables
 import com.example.abha_create_verify_android.verify.AbhaVerifyActivity
 import com.facebook.react.ReactActivity
 import com.facebook.react.bridge.Arguments
@@ -19,7 +20,7 @@ class AbhaAddressSuccessActivity : ReactActivity() {
 
     private lateinit var binding: ActivityAbhaAddressSuceessBinding
     private lateinit var viewModel: MainViewModel
-    private var isVerify = false
+    private var isABHAVerification = Variables.isABHAVerification
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,11 +30,9 @@ class AbhaAddressSuccessActivity : ReactActivity() {
         setupViewModel()
 
         setSupportActionBar(binding.toolbarAbha)
-
-        isVerify = intent.getBooleanExtra("isVerify", false)
-        supportActionBar?.title = if(isVerify) resources.getString(R.string.verify_abha) else  resources.getString(R.string.create_abha)
-
-
+        
+        supportActionBar?.title = if(isABHAVerification) resources.getString(R.string.verify_abha) else  resources.getString(R.string.create_abha)
+        
         binding.abhaNumber.text =  PatientSubject.patientSubject.abhaNumber
         binding.abhaAddress.text =  PatientSubject.patientSubject.abhaAddress
 
@@ -67,7 +66,7 @@ class AbhaAddressSuccessActivity : ReactActivity() {
         builder.setTitle("Confirmation")
             .setMessage("Are you sure you want to go back to the home screen?")
             .setPositiveButton("Yes") { _, _ ->
-                val intent = Intent(this, if(isVerify) AbhaVerifyActivity::class.java
+                val intent = Intent(this, if(isABHAVerification) AbhaVerifyActivity::class.java
                 else CreateAbhaActivity::class.java)
                 startActivity(intent)
             }

@@ -13,7 +13,6 @@ import com.example.abha_create_verify_android.data.api.RetrofitBuilder
 import com.example.abha_create_verify_android.databinding.ActivityPatientBioBinding
 import com.example.abha_create_verify_android.utils.Status
 import com.example.abha_create_verify_android.utils.Variables
-import com.example.abha_create_verify_android.verify.AbhaVerifyActivity
 
 class PatientBioActivity : AppCompatActivity() {
 
@@ -47,6 +46,7 @@ class PatientBioActivity : AppCompatActivity() {
         }
         binding.proceedButton.setOnClickListener {
             if(isABHANumberExisting) {
+                Variables.isNewABHACreated = false
                 isABHANumberLinkedToPatient =  Variables.EXISTING_ABHA_NUMBERS?.contains(patientSubject.abhaNumber) == true
                 if(isABHANumberLinkedToPatient)
                 {
@@ -68,7 +68,7 @@ class PatientBioActivity : AppCompatActivity() {
                                     val intent = Intent(this, AbhaAddressActivity::class.java)
                                     PatientSubject().setABHANumber(data.healthIdNumber)
                                     intent.putExtra("healthIdNumber", data.healthIdNumber)
-                                    intent.putExtra("newABHA", true)
+                                    Variables.isNewABHACreated = true
                                     startActivity(intent)
                                     finish()
                                 }
