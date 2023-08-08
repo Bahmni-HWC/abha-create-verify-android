@@ -92,6 +92,7 @@ class AbhaAddressActivity : AppCompatActivity() {
                 val intent = Intent(this, if(isABHAVerification) AbhaVerifyActivity::class.java
                 else CreateAbhaActivity::class.java)
                 startActivity(intent)
+                finish()
             }
             .setNegativeButton("No", null)
             .show()

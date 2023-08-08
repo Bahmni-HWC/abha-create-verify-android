@@ -112,6 +112,7 @@ class PatientBioActivity : AppCompatActivity() {
                 .setPositiveButton("Yes") { _, _ ->
                     val intent = Intent(this, CreateAbhaActivity::class.java)
                     startActivity(intent)
+                    finish()
                 }
                 .setNegativeButton("No", null)
                 .show()
