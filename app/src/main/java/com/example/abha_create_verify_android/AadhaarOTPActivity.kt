@@ -11,6 +11,7 @@ import com.example.abha_create_verify_android.data.api.ApiHelper
 import com.example.abha_create_verify_android.data.api.RetrofitBuilder
 import com.example.abha_create_verify_android.data.model.VerifyOTPReq
 import com.example.abha_create_verify_android.databinding.ActivityAadhaarOtpactivityBinding
+import com.example.abha_create_verify_android.utils.DialogUtils
 import com.example.abha_create_verify_android.utils.Status
 
 class AadhaarOTPActivity : AppCompatActivity() {
@@ -24,7 +25,7 @@ class AadhaarOTPActivity : AppCompatActivity() {
         setContentView(binding.root)
         setupViewModel()
 
-        setSupportActionBar(binding.toolbarAbha)
+        setSupportActionBar(binding.appBarLayout.includeToolbar.toolbarAbha)
         supportActionBar?.title = resources.getString(R.string.create_abha)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
@@ -64,6 +65,12 @@ class AadhaarOTPActivity : AppCompatActivity() {
                         }
                     }
                 }
+            }
+        }
+
+        binding.appBarLayout.includeToolbar.customCloseButton.setOnClickListener { v ->
+            DialogUtils.showConfirmationDialog(this) {
+                super.onBackPressed()
             }
         }
     }

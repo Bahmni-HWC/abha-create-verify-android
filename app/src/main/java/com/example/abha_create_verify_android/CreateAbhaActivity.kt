@@ -13,6 +13,7 @@ import android.widget.ScrollView
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import com.example.abha_create_verify_android.databinding.ActivityCreateAbhaBinding
+import com.example.abha_create_verify_android.utils.DialogUtils
 
 class CreateAbhaActivity : AppCompatActivity() {
 
@@ -24,8 +25,8 @@ class CreateAbhaActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityCreateAbhaBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-        setSupportActionBar(binding.toolbarAbha)
+        setSupportActionBar(binding.appBarLayout.includeToolbar.toolbarAbha)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.title = resources.getString(R.string.create_abha)
 
         val termsAndConditionsTextView = findViewById<TextView>(R.id.termsConditionsTextView)
@@ -77,6 +78,12 @@ class CreateAbhaActivity : AppCompatActivity() {
                 }
             }
         })
+
+        binding.appBarLayout.includeToolbar.customCloseButton.setOnClickListener { v ->
+            DialogUtils.showConfirmationDialog(this) {
+                super.onBackPressed()
+            }
+        }
 
     }
 

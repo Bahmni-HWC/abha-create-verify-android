@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
 import com.example.abha_create_verify_android.databinding.ActivityDemographicBinding
+import com.example.abha_create_verify_android.utils.DialogUtils
 
 class DemographicActivity : AppCompatActivity() {
 
@@ -14,9 +15,15 @@ class DemographicActivity : AppCompatActivity() {
         binding = ActivityDemographicBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        setSupportActionBar(binding.toolbarAbha)
+        setSupportActionBar(binding.appBarLayout.includeToolbar.toolbarAbha)
         supportActionBar?.title = resources.getString(R.string.create_abha)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+        binding.appBarLayout.includeToolbar.customCloseButton.setOnClickListener { v ->
+            DialogUtils.showConfirmationDialog(this) {
+                super.onBackPressed()
+            }
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

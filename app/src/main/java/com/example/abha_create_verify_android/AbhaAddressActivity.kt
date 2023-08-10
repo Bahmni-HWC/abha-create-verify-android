@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.abha_create_verify_android.data.api.ApiHelper
 import com.example.abha_create_verify_android.data.api.RetrofitBuilder
 import com.example.abha_create_verify_android.databinding.ActivityAbhaAddressBinding
+import com.example.abha_create_verify_android.utils.DialogUtils
 import com.example.abha_create_verify_android.utils.Status
 import com.example.abha_create_verify_android.utils.Variables
 import com.example.abha_create_verify_android.verify.AbhaVerifyActivity
@@ -27,7 +28,8 @@ class AbhaAddressActivity : AppCompatActivity() {
         setContentView(binding.root)
         setupViewModel()
 
-        setSupportActionBar(binding.toolbarAbha)
+        setSupportActionBar(binding.appBarLayout.includeToolbar.toolbarAbha)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         if(Variables.isNewABHACreated) {
             val abhaNumberVal = PatientSubject.patientSubject.abhaNumber
@@ -73,6 +75,12 @@ class AbhaAddressActivity : AppCompatActivity() {
                         }
                     }
                 }
+            }
+        }
+
+        binding.appBarLayout.includeToolbar.customCloseButton.setOnClickListener { v ->
+            DialogUtils.showConfirmationDialog(this) {
+                super.onBackPressed()
             }
         }
     }

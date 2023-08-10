@@ -21,6 +21,7 @@ import com.example.abha_create_verify_android.data.api.ApiHelper
 import com.example.abha_create_verify_android.data.api.RetrofitBuilder
 import com.example.abha_create_verify_android.data.model.SearchAbhaReq
 import com.example.abha_create_verify_android.databinding.ActivityAbhaVerifyBinding
+import com.example.abha_create_verify_android.utils.DialogUtils
 import com.example.abha_create_verify_android.utils.Status
 import com.example.abha_create_verify_android.utils.Variables
 
@@ -35,7 +36,8 @@ class AbhaVerifyActivity : AppCompatActivity() {
         setContentView(binding.root)
         setupViewModel()
 
-        setSupportActionBar(binding.toolbarAbha)
+        setSupportActionBar(binding.appBarLayout.includeToolbar.toolbarAbha)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
         supportActionBar?.title = resources.getString(R.string.verify_abha)
 
         val termsAndConditionsTextView = findViewById<TextView>(R.id.termsConditionsTextView)
@@ -89,6 +91,12 @@ class AbhaVerifyActivity : AppCompatActivity() {
                 else {
                     binding.txtLinked.visibility = View.VISIBLE
                 }
+            }
+        }
+
+        binding.appBarLayout.includeToolbar.customCloseButton.setOnClickListener { v ->
+            DialogUtils.showConfirmationDialog(this) {
+                super.onBackPressed()
             }
         }
     }

@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.abha_create_verify_android.data.api.ApiHelper
 import com.example.abha_create_verify_android.data.api.RetrofitBuilder
 import com.example.abha_create_verify_android.databinding.ActivityPatientBioBinding
+import com.example.abha_create_verify_android.utils.DialogUtils
 import com.example.abha_create_verify_android.utils.Status
 import com.example.abha_create_verify_android.utils.Variables
 
@@ -27,7 +28,7 @@ class PatientBioActivity : AppCompatActivity() {
         setContentView(binding.root)
         setupViewModel()
 
-        setSupportActionBar(binding.toolbarAbha)
+        setSupportActionBar(binding.appBarLayout.includeToolbar.toolbarAbha)
         supportActionBar?.title = resources.getString(R.string.create_abha)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
@@ -85,6 +86,12 @@ class PatientBioActivity : AppCompatActivity() {
                         }
                     }
                 }
+            }
+        }
+
+        binding.appBarLayout.includeToolbar.customCloseButton.setOnClickListener { v ->
+            DialogUtils.showConfirmationDialog(this) {
+                super.onBackPressed()
             }
         }
     }
