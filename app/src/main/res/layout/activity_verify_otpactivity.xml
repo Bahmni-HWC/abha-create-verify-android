@@ -6,24 +6,9 @@
     android:layout_height="match_parent"
     tools:context=".verify.VerifyOTPActivity">
 
-    <com.google.android.material.appbar.AppBarLayout
+    <include
         android:id="@+id/appBarLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/Theme.Abhacreateverifyandroid.AppBarOverlay"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/toolbarAbha"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:popupTheme="@style/Theme.Abhacreateverifyandroid.PopupOverlay"
-            app:titleCentered="true" />
-
-    </com.google.android.material.appbar.AppBarLayout>
+        layout="@layout/common_app_bar"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
