@@ -96,7 +96,7 @@ class AbhaVerifyActivity : AppCompatActivity() {
 
         binding.appBarLayout.includeToolbar.customCloseButton.setOnClickListener { v ->
             DialogUtils.showConfirmationDialog(this) {
-                super.onBackPressed()
+                onBackPressedDispatcher.onBackPressed()
             }
         }
     }
