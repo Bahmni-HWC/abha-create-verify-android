@@ -26,7 +26,10 @@ class MainActivity : AppCompatActivity() {
         if(token != null) {
             RetrofitBuilder.AUTH_TOKEN = token
         }
-        RetrofitBuilder.BASE_URL = intent.getStringExtra("hipBaseURL").toString()
+        val baseUrl = intent.getStringExtra("hipBaseURL")
+        if(baseUrl != null) {
+            RetrofitBuilder.BASE_URL = baseUrl
+        }
         val stringArray = intent.getStringArrayExtra("existingABHANumbers")
         if(stringArray != null) {
             Variables.EXISTING_ABHA_NUMBERS = stringArray
