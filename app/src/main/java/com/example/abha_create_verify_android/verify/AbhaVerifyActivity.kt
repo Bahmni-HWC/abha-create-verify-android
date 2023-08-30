@@ -171,5 +171,11 @@ class AbhaVerifyActivity : AppCompatActivity() {
         finish()
     }
 
+    fun openMobileNumberVerification(view: View) {
+        val intent = Intent(this, VerifyMobileNumberActivity::class.java)
+        startActivity(intent)
+        finish()
+    }
+
 
 }

@@ -32,6 +32,12 @@ class MainRepository(private val apiHelper: ApiHelper) {
 
     suspend fun confirmOtp(confirmOtpReq: ConfirmOtpReq) = apiHelper.confirmOtp(confirmOtpReq)
 
+    suspend fun generateMobileOtp(generateMobileOTPReq: GenerateMobileOTPReq) = apiHelper.generateMobileOtp(generateMobileOTPReq)
+
+    suspend fun verifyOtp(verifyOTPReq: VerifyOTPReq) = apiHelper.verifyOtp(verifyOTPReq)
+
+    suspend fun getABHAProfile(abhaReq: SearchAbhaReq) = apiHelper.getABHAProfile(abhaReq)
+
     suspend fun addPatientDemographics(patientDemographics: PatientDemographics) = apiHelper.addPatientDemographics(patientDemographics)
 
 }

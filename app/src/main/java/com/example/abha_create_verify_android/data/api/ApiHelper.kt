@@ -30,5 +30,8 @@ class ApiHelper(private val apiService: ApiService) {
     suspend fun authInit(authInitReq: AuthInitReq) = apiService.authInit(authInitReq)
 
     suspend fun confirmOtp(confirmOtpReq: ConfirmOtpReq) = apiService.confirmOtp(confirmOtpReq)
+    suspend fun generateMobileOtp(generateMobileOTPReq: GenerateMobileOTPReq) = apiService.generateMobileOtp(generateMobileOTPReq)
+    suspend fun verifyOtp(verifyOTPReq: VerifyOTPReq) = apiService.verifyOtp(verifyOTPReq)
+    suspend fun getABHAProfile(abhaReq: SearchAbhaReq) = apiService.getABHAProfile(abhaReq)
     suspend fun addPatientDemographics(patientDemographics: PatientDemographics) = apiService.addPatientDemographics(patientDemographics)
 }

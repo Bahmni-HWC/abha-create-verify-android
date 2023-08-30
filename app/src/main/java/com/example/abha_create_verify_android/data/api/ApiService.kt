@@ -10,6 +10,7 @@ import com.example.abha_create_verify_android.data.model.GenerateAadhaarOTPReq
 import com.example.abha_create_verify_android.data.model.GenerateAadhaarOTPResp
 import com.example.abha_create_verify_android.data.model.GenerateMobileOTPReq
 import com.example.abha_create_verify_android.data.model.GenerateMobileOTPResp
+import com.example.abha_create_verify_android.data.model.MobileNumberLinkedABHA
 import com.example.abha_create_verify_android.data.model.SearchAbhaReq
 import com.example.abha_create_verify_android.data.model.SearchAbhaResp
 import com.example.abha_create_verify_android.data.model.VerifyAadhaarOTPResp
@@ -51,6 +52,15 @@ interface ApiService {
 
     @POST("hiprovider/v2/hip/confirmOTP")
     suspend fun confirmOtp(@Body requestBody: ConfirmOtpReq): Response<VerifyAbhaPatient>
+
+    @POST("hiprovider/v2/registration/mobile/login/generateOtp")
+    suspend fun generateMobileOtp(@Body requestBody: GenerateMobileOTPReq): Response<Unit>
+
+    @POST("hiprovider/v2/registration/mobile/login/verifyOtp")
+    suspend fun verifyOtp(@Body requestBody: VerifyOTPReq): Response<List<MobileNumberLinkedABHA>>
+
+    @POST("hiprovider/v2/registration/mobile/login/userAuthorizedToken")
+    suspend fun getABHAProfile(@Body requestBody: SearchAbhaReq): Response<VerifyAbhaPatient>
 
     @POST("hiprovider/v0.5/hip/ndhm-demographics")
     suspend fun addPatientDemographics(@Body requestBody: PatientDemographics): Response<Unit>

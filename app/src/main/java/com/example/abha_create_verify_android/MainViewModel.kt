@@ -198,6 +198,57 @@ class MainViewModel(private val mainRepository: MainRepository) : ViewModel() {
         }
     }
 
+    fun generateMobileOtp(generateMobileOTPReq: GenerateMobileOTPReq) = liveData(Dispatchers.IO) {
+        emit(Resource.loading(data = null))
+        try {
+            val res = mainRepository.generateMobileOtp(generateMobileOTPReq)
+            if(res.code() == 202)
+                res.body()?.let {
+                    emit(Resource.success(data = it))
+                }
+            else {
+                val errorMessage = res.errorBody()?.let { handleErrorResponse(it) }!!
+                emit(Resource.error(data = null, message = errorMessage))
+            }
+        } catch (exception: Exception) {
+            emit(Resource.error(data = null, message = exception.message ?: "Error Occurred!"))
+        }
+    }
+
+    fun verifyOtp(verifyOTPReq: VerifyOTPReq) = liveData(Dispatchers.IO) {
+        emit(Resource.loading(data = null))
+        try {
+            val res = mainRepository.verifyOtp(verifyOTPReq)
+            if(res.code() == 202)
+                res.body()?.let {
+                    emit(Resource.success(data = it))
+                }
+            else {
+                val errorMessage = res.errorBody()?.let { handleErrorResponse(it) }!!
+                emit(Resource.error(data = null, message = errorMessage))
+            }
+        } catch (exception: Exception) {
+            emit(Resource.error(data = null, message = exception.message ?: "Error Occurred!"))
+        }
+    }
+
+    fun getAbhaProile(abhaReq: SearchAbhaReq) = liveData(Dispatchers.IO) {
+        emit(Resource.loading(data = null))
+        try {
+            val res = mainRepository.getABHAProfile(abhaReq)
+            if(res.code() == 202)
+                res.body()?.let {
+                    emit(Resource.success(data = it))
+                }
+            else {
+                val errorMessage = res.errorBody()?.let { handleErrorResponse(it) }!!
+                emit(Resource.error(data = null, message = errorMessage))
+            }
+        } catch (exception: Exception) {
+            emit(Resource.error(data = null, message = exception.message ?: "Error Occurred!"))
+        }
+    }
+
     fun addPatientDemographics(patientDemographics: PatientDemographics) = liveData(Dispatchers.IO) {
         emit(Resource.loading(data = null))
         try {
