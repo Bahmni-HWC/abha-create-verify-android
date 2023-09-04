@@ -54,7 +54,7 @@ class MobileLinkedABHAActivity : AppCompatActivity() {
 
         val listContainer = findViewById<LinearLayout>(R.id.listContainer)
 
-        var isABHAAddressLinked = false
+        var isABHAAddressLinked = true
         var selectedIndex = -1
         var selectedTextView: AppCompatTextView? = null
 
@@ -75,10 +75,6 @@ class MobileLinkedABHAActivity : AppCompatActivity() {
                     if (dataList[selectedIndex].abhaAddress.isEmpty()) {
                         binding.abhaAddressNotLinked.visibility = View.VISIBLE
                         isABHAAddressLinked = false
-                    }
-                    else
-                    {
-                        isABHAAddressLinked = true
                     }
                 }
 
