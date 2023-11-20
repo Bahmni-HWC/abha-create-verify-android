@@ -104,6 +104,8 @@ class AadhaarSecureQr(scanData: String?) {
         scannedAadhaarCardInfo.name = decodedData!![2 + index]
         scannedAadhaarCardInfo.dateOfBirth = decodedData!![3 + index]
         scannedAadhaarCardInfo.gender = decodedData!![4 + index]
+        scannedAadhaarCardInfo.villageTownCity = decodedData!![15 + index]
+        scannedAadhaarCardInfo.subDistrict = decodedData!![14 + index]
         scannedAadhaarCardInfo.district = decodedData!![6 + index]
         scannedAadhaarCardInfo.pinCode = decodedData!![10 + index]
         scannedAadhaarCardInfo.state = decodedData!![12 + index]
