@@ -1,6 +1,6 @@
 package com.example.abha_create_verify_android.utils
 
-class AadhaarCard {
+class AadhaarCardInfo {
 
     var name = ""
     var dateOfBirth = ""

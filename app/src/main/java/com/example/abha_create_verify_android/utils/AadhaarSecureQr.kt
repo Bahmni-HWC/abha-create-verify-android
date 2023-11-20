@@ -12,7 +12,7 @@ import java.util.zip.GZIPInputStream
 
 class AadhaarSecureQr(scanData: String?) {
     private var decodedData: ArrayList<String>? = null
-    private var scannedAadhaarCard: AadhaarCard = AadhaarCard()
+    private var scannedAadhaarCardInfo: AadhaarCardInfo = AadhaarCardInfo()
 
     init {
 
@@ -101,17 +101,17 @@ class AadhaarSecureQr(scanData: String?) {
           index=1
         }
 
-        scannedAadhaarCard.name = decodedData!![2 + index]
-        scannedAadhaarCard.dateOfBirth = decodedData!![3 + index]
-        scannedAadhaarCard.gender = decodedData!![4 + index]
-        scannedAadhaarCard.district = decodedData!![6 + index]
-        scannedAadhaarCard.pinCode = decodedData!![10 + index]
-        scannedAadhaarCard.state = decodedData!![12 + index]
-        scannedAadhaarCard.last4DigitAadhaar = decodedData!![1 + index].substring(0, 4)
+        scannedAadhaarCardInfo.name = decodedData!![2 + index]
+        scannedAadhaarCardInfo.dateOfBirth = decodedData!![3 + index]
+        scannedAadhaarCardInfo.gender = decodedData!![4 + index]
+        scannedAadhaarCardInfo.district = decodedData!![6 + index]
+        scannedAadhaarCardInfo.pinCode = decodedData!![10 + index]
+        scannedAadhaarCardInfo.state = decodedData!![12 + index]
+        scannedAadhaarCardInfo.last4DigitAadhaar = decodedData!![1 + index].substring(0, 4)
     }
 
-    fun getScannedAadhaarInfo(): AadhaarCard {
-        return scannedAadhaarCard
+    fun getScannedAadhaarInfo(): AadhaarCardInfo {
+        return scannedAadhaarCardInfo
     }
 }
 
