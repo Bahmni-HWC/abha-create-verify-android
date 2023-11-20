@@ -82,7 +82,7 @@ class AuthModeActivity : AppCompatActivity() {
 
     private fun moveToDemographic() {
         val aadhaarNumber = intent.getStringExtra("aadhaarNumber")
-        val intent = Intent(this, DemographicActivity::class.java)
+        val intent = Intent(this, DemographicsManualOrQRScanActivity::class.java)
         intent.putExtra("aadhaarNumber", aadhaarNumber)
         startActivity(intent)
         finish()
