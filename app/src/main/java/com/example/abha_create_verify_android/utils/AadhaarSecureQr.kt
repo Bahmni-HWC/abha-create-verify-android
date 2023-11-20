@@ -96,14 +96,18 @@ class AadhaarSecureQr(scanData: String?) {
                 throw QrCodeException("Decoding QR code, ISO-8859-1 not supported", e)
             }
         }
+        var index=0
+        if(decodedData!![0].equals("V2")){
+          index=1
+        }
 
-        scannedAadhaarCard.name = decodedData!![2]
-        scannedAadhaarCard.dateOfBirth = decodedData!![3]
-        scannedAadhaarCard.gender = decodedData!![4]
-        scannedAadhaarCard.district = decodedData!![6]
-        scannedAadhaarCard.pinCode = decodedData!![10]
-        scannedAadhaarCard.state = decodedData!![12]
-        scannedAadhaarCard.last4DigitAadhaar = decodedData!![1].substring(0, 4)
+        scannedAadhaarCard.name = decodedData!![2 + index]
+        scannedAadhaarCard.dateOfBirth = decodedData!![3 + index]
+        scannedAadhaarCard.gender = decodedData!![4 + index]
+        scannedAadhaarCard.district = decodedData!![6 + index]
+        scannedAadhaarCard.pinCode = decodedData!![10 + index]
+        scannedAadhaarCard.state = decodedData!![12 + index]
+        scannedAadhaarCard.last4DigitAadhaar = decodedData!![1 + index].substring(0, 4)
     }
 
     fun getScannedAadhaarInfo(): AadhaarCard {
