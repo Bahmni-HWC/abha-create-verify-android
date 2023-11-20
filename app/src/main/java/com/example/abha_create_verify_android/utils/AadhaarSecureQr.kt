@@ -97,7 +97,7 @@ class AadhaarSecureQr(scanData: String?) {
             }
         }
         var index=0
-        if(decodedData!![0].equals("V2")){
+        if(decodedData!![0] == "V2"){
           index=1
         }
 
@@ -109,7 +109,6 @@ class AadhaarSecureQr(scanData: String?) {
         scannedAadhaarCardInfo.district = decodedData!![6 + index]
         scannedAadhaarCardInfo.pinCode = decodedData!![10 + index]
         scannedAadhaarCardInfo.state = decodedData!![12 + index]
-        scannedAadhaarCardInfo.last4DigitAadhaar = decodedData!![1 + index].substring(0, 4)
     }
 
     fun getScannedAadhaarInfo(): AadhaarCardInfo {

@@ -2,13 +2,12 @@ package com.example.abha_create_verify_android.utils
 
 data class AadhaarCardInfo (
 
-    var name : String = "",
-    var dateOfBirth : String = "",
-    var gender : String = "",
-    var villageTownCity : String = "",
-    var subDistrict : String  = "",
-    var district : String  = "",
-    var pinCode : String  = "",
-    var state : String  = "",
-    var last4DigitAadhaar : String  = "",
+    var name : String? = null,
+    var dateOfBirth : String? = null,
+    var gender : String? = null,
+    var villageTownCity : String? = null,
+    var subDistrict : String? = null,
+    var district : String? = null,
+    var pinCode : String? = null,
+    var state : String? = null,
 )
