@@ -17,7 +17,7 @@
     <string name="enter_aadhaar_number">Enter your Aadhaar Number</string>
     <string name="do_you_agree_with_the_terms_and_conditions">Do you agree with the terms and conditions</string>
     <string name="proceed">Proceed</string>
-    <string name="scan_QR">Scan QR</string>
+    <string name="scan_QR">Scan Aadhaar QR</string>
     <string name="enter_manually">Enter Manually</string>
     <string name="check_your_aadhaar_linked_mobile_number">Check your aadhaar linked mobile number</string>
     <string name="enter_otp">Enter OTP</string>

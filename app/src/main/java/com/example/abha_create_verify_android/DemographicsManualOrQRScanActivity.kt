@@ -10,6 +10,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import com.example.abha_create_verify_android.databinding.ActivityDemographicsManualOrQrscanBinding
 import com.example.abha_create_verify_android.utils.DialogUtils
+import com.google.android.gms.common.moduleinstall.ModuleInstall
+import com.google.android.gms.common.moduleinstall.ModuleInstallRequest
 import com.google.mlkit.vision.barcode.common.Barcode
 import com.google.mlkit.vision.codescanner.GmsBarcodeScannerOptions
 import com.google.mlkit.vision.codescanner.GmsBarcodeScanning
@@ -60,8 +62,23 @@ class DemographicsManualOrQRScanActivity : AppCompatActivity() {
             )
             .build()
         var data: String? = null;
-
         val scanner = GmsBarcodeScanning.getClient(this, options)
+
+        val moduleInstallRequest =
+            ModuleInstallRequest.newBuilder()
+                .addApi(scanner)
+                .build()
+        val moduleInstallClient = ModuleInstall.getClient(this)
+
+        moduleInstallClient
+            .installModules(moduleInstallRequest)
+            .addOnSuccessListener {
+                Log.d("QR", "Modules successfully installed")
+            }
+            .addOnFailureListener {
+                Log.e("MainActivity", "Error installing modules", it)
+            }
+
         scanner.startScan()
             .addOnSuccessListener { barcode ->
                 data = barcode.rawValue;
@@ -70,7 +87,7 @@ class DemographicsManualOrQRScanActivity : AppCompatActivity() {
             }
             .addOnFailureListener { e ->
                 val errorMessage = "Some unexpected error occurred: $e"
-                Log.d("QR", "failed:  $e")
+                Log.e("QR", "failed:  $e")
                 failureMessage.postValue(errorMessage)
             }
         return data;
