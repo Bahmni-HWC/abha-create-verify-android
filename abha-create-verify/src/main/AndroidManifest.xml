@@ -5,6 +5,7 @@
     <application
         android:supportsRtl="true"
         tools:targetApi="31"
+        android:hardwareAccelerated="true"
         android:usesCleartextTraffic="true">
         <activity
             android:name=".verify.MobileLinkedABHAActivity"
@@ -77,6 +78,18 @@
             android:exported="false"
             android:theme="@style/Theme.Abhacreateverifyandroid.NoActionBar">
         </activity>
+        <activity
+            android:name=".DemographicsManualOrQRScanActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Abhacreateverifyandroid.NoActionBar"/>
+        <activity
+            android:name="com.journeyapps.barcodescanner.CaptureActivity"
+            android:screenOrientation="fullSensor"
+            tools:replace="screenOrientation" />
+        <activity
+            android:name=".ScannedAadhaarInfoActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Abhacreateverifyandroid.NoActionBar"/>
         <activity
             android:name=".MainActivity"
             android:exported="true"
