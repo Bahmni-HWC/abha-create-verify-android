@@ -12,6 +12,7 @@
 
     <string name="create_abha">Create ABHA</string>
     <string name="verify_abha">Verify ABHA</string>
+    <string name="aadhaar_info">Aadhaar Info</string>
     <string name="aadhaar_validation">Aadhaar Validation</string>
     <string name="choose_auth_mode">Choose Authentication Mode</string>
     <string name="enter_aadhaar_number">Enter your Aadhaar Number</string>

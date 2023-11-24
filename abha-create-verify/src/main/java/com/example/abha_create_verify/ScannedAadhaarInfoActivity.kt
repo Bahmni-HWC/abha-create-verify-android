@@ -7,11 +7,9 @@ import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AlertDialog
-import androidx.lifecycle.ViewModelProvider
-import com.example.abha_create_verify.data.api.ApiHelper
-import com.example.abha_create_verify.data.api.RetrofitBuilder
 import com.example.abha_create_verify.databinding.ActivityPatientBioBinding
 import com.example.abha_create_verify.utils.DialogUtils
+import com.example.abha_create_verify.utils.Variables
 import com.facebook.react.ReactActivity
 import com.facebook.react.bridge.Arguments
 import com.facebook.react.bridge.WritableMap
@@ -21,17 +19,15 @@ import com.google.gson.Gson
 class ScannedAadhaarInfoActivity : ReactActivity() {
 
     private lateinit var binding: ActivityPatientBioBinding
-    private lateinit var viewModel: MainViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityPatientBioBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        setupViewModel()
 
         setSupportActionBar(binding.appBarLayout.includeToolbar.toolbarAbha)
         
-        supportActionBar?.title = resources.getString(R.string.create_abha)
+        supportActionBar?.title = resources.getString(R.string.aadhaar_info)
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
@@ -72,14 +68,6 @@ class ScannedAadhaarInfoActivity : ReactActivity() {
 
         onBackPressedDispatcher.onBackPressed()
     }
-
-    private fun setupViewModel() {
-        viewModel = ViewModelProvider(
-            this,
-            ViewModelFactory(ApiHelper(RetrofitBuilder.apiService))
-        )[MainViewModel::class.java]
-    }
-
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == android.R.id.home) {
             onBackPressed()
@@ -88,14 +76,20 @@ class ScannedAadhaarInfoActivity : ReactActivity() {
         return super.onOptionsItemSelected(item)
     }
 
+    private fun handleBack() {
+        if(Variables.isCreateAbhaScan) {
+            val intent = Intent(this, DemographicsManualOrQRScanActivity::class.java)
+            startActivity(intent)
+        }
+        finish()
+    }
+
     override fun onBackPressed() {
         val builder = AlertDialog.Builder(this)
         builder.setTitle("Confirmation")
             .setMessage("Are you sure you want to go back to the home screen?")
             .setPositiveButton("Yes") { _, _ ->
-                val intent = Intent(this, CreateAbhaActivity::class.java)
-                startActivity(intent)
-                finish()
+               handleBack()
             }
             .setNegativeButton("No", null)
             .show()
