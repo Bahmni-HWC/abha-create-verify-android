@@ -82,9 +82,7 @@ class ScannedAadhaarInfoActivity : ReactActivity() {
             startActivity(intent)
             finish()
         }
-        else {
-            finish()
-        }
+        finish()
     }
 
     override fun onBackPressed() {

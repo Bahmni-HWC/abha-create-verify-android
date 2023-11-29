@@ -50,9 +50,7 @@ class AadhaarQRScanActivity : AppCompatActivity() {
             startActivity(intent)
             finish()
         }
-        else {
-            finish()
-        }
+        finish()
     }
 
     private fun isSecureQR(sample: String): Boolean {
