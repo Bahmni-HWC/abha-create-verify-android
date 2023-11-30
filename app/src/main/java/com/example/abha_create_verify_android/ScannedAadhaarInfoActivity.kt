@@ -80,7 +80,6 @@ class ScannedAadhaarInfoActivity : ReactActivity() {
         if(Variables.isCreateAbhaScan) {
             val intent = Intent(this, DemographicsManualOrQRScanActivity::class.java)
             startActivity(intent)
-            finish()
         }
         finish()
     }

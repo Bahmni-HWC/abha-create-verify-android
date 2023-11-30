@@ -38,7 +38,6 @@ class AadhaarQRScanActivity : AppCompatActivity() {
                 .show()
             result.contents?.let {
                 processQRData(it)
-                displayAadhaarInfo()
             }
         }
     }
@@ -48,7 +47,6 @@ class AadhaarQRScanActivity : AppCompatActivity() {
         if(Variables.isCreateAbhaScan) {
             val intent = Intent(this, DemographicsManualOrQRScanActivity::class.java)
             startActivity(intent)
-            finish()
         }
         finish()
     }
@@ -84,7 +82,7 @@ class AadhaarQRScanActivity : AppCompatActivity() {
                 else -> AadhaarPlainTextQrParser(scannedData).getAadhaarCardInfo()
             }
             PatientSubject().setPatient(aadhaarCardInfo)
-
+            displayAadhaarInfo()
         } catch (e: Exception) {
             e.printStackTrace()
             Toast.makeText(this, "Error Processing QR", Toast.LENGTH_SHORT).show()
