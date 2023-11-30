@@ -97,6 +97,10 @@
             android:exported="false"
             android:theme="@style/Theme.Abhacreateverifyandroid.NoActionBar"/>
         <activity
+            android:name=".AadhaarQRScanActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Abhacreateverifyandroid.NoActionBar"/>
+        <activity
             android:name=".MainActivity"
             android:exported="true"
             android:theme="@style/Theme.Abhacreateverifyandroid.NoActionBar">
