@@ -7,6 +7,7 @@ import com.example.abha_create_verify.data.api.RetrofitBuilder
 import com.example.abha_create_verify.databinding.ActivityMainBinding
 import com.example.abha_create_verify.utils.Variables
 import com.example.abha_create_verify.verify.AbhaVerifyActivity
+import com.example.abha_create_verify.utils.Patient
 
 
 class MainActivity : AppCompatActivity() {
@@ -35,6 +36,7 @@ class MainActivity : AppCompatActivity() {
             Variables.EXISTING_ABHA_NUMBERS = stringArray
         }
         Variables.isABHAVerification = false
+        PatientSubject.patientSubject = Patient()
 
         binding.createAbha.setOnClickListener {
             val intent = Intent(this, CreateAbhaActivity::class.java)
